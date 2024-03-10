@@ -68,7 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Customer\Default.aspx" />
-    <Content Include="Customer\Registration.aspx" />
+    <Content Include="Res\CSS\Style.css" />
     <Content Include="Res\Images\logo.png" />
     <Content Include="Res\Images\shop-image.jpg" />
     <Content Include="Web.config" />
