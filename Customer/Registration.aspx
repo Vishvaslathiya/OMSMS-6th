@@ -17,6 +17,8 @@
     <script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule="" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"></script>
 
+    <%-- Favicon --%>
+    <link rel="icon" href="../Res/Images/logo.png" type="image/png" />
 </head>
 <body>
     <div class="py-16">
@@ -53,30 +55,80 @@
                 <a href="#" class="text-xs text-center text-gray-500 uppercase">or login with email</a>
                 <span class="border-b w-1/5 lg:w-1/4"></span>
             </div>--%>
+
+                <%-- Regisration Form --%>
                 <form id="RegistrationForm" runat="server">
+                    <%-- Name --%>
                     <div class="mt-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Full Name</label>
                         <asp:TextBox runat="server" ID="txtName" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" />
                     </div>
+                    <%-- Email --%>
                     <div class="mt-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
                         <asp:TextBox runat="server" ID="txtEmail" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" TextMode="Email" />
                     </div>
+                    <%-- Phone --%>
+                    <div class="mt-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Phone Number</label>
+                        <asp:TextBox runat="server" ID="txtPhone" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" TextMode="Number" />
+                        </div>
+                    <%-- Password --%>
                     <div class="mt-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
                         <asp:TextBox runat="server" ID="txtPassword" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" TextMode="Password" />
                     </div>
+                    <%-- Repeat Password --%>
                     <div class="mt-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Repeat Password</label>
                         <asp:TextBox runat="server" ID="txtRepeatPassword" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" TextMode="Password" />
                     </div>
-                    <div class="mt-8">
-                        <asp:Button runat="server" ID="btnLogin" class="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600" Text="Register"></asp:Button>
+                    <%-- Gender --%>
+                    <div class="mt-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Gender</label>
+                        <div class="flex bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none space-x-5">
+                            <div>
+                                <asp:RadioButton runat="server" ID="rbMale" GroupName="gener" class="text-lg" />
+                                <label>Male</label>
+                            </div>
+                            <div>
+                                <asp:RadioButton runat="server" ID="rbFemale" GroupName="gener" class="text-lg" />
+                                <label>Female</label>
+                            </div>
+                            <div>
+                                <asp:RadioButton runat="server" ID="rbOther" GroupName="gener" class="text-lg" />
+                                <label>Other</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <%-- State --%>
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">State</label>
+                            <asp:DropDownList runat="server" ID="ddlState" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none">
+                            </asp:DropDownList>
+                        </div>
+                        <%-- City --%>
+                        <div class="mt-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2">City</label>
+                            <asp:DropDownList runat="server" ID="ddlCity" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none">
+                            </asp:DropDownList>
+                        </div>
+                    </div>
+                    <%-- Address --%>
+                    <div class="mt-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Address</label>
+                        <asp:TextBox runat="server" ID="txtAddress" TextMode="MultiLine" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" />
+                        </div>
+                    <%-- Register Button --%>
+                    <div class="mt-4">
+                        <asp:Button runat="server" ID="btnRegister" class="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600" Text="Register"></asp:Button>
                     </div>
                 </form>
+                <%-- Sign in Link --%>
                 <div class="mt-4 flex items-center justify-between">
                     <span class="border-b w-1/5 md:w-1/4"></span>
-                    <a href="../Login.aspx" class="text-sm text-gray-500 uppercase hover:text-cyan-600">or sign in</a>
+                    <a href="../Res/Login.aspx" class="text-sm text-gray-500 uppercase hover:text-cyan-600">or sign in</a>
                     <span class="border-b w-1/5 md:w-1/4"></span>
                 </div>
             </div>

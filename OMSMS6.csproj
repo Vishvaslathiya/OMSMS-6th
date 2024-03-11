@@ -68,9 +68,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Customer\Default.aspx" />
+    <Content Include="Customer\Registration.aspx" />
     <Content Include="Res\CSS\Style.css" />
     <Content Include="Res\Images\logo.png" />
     <Content Include="Res\Images\shop-image.jpg" />
+    <Content Include="Res\Login.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +97,13 @@
     </Compile>
     <Compile Include="Res\Customer_Navbar.Master.designer.cs">
       <DependentUpon>Customer_Navbar.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Res\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Res\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

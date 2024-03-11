@@ -25,7 +25,7 @@
         <nav class="flex justify-between items-center w-[92%]  mx-auto">
             <div>
                 <a href="Default.aspx">
-                    <img class="w-16 cursor-pointer" src="../wwwroot/images/logo.png" alt="logo">
+                    <img class="w-12 cursor-pointer" src="../Res/Images/logo.png" alt="logo">
                 </a>
             </div>
             <div
@@ -65,12 +65,12 @@
         const navLinks = document.querySelector('.nav-links')
         function onToggleMenu(e) {
             e.name = e.name === 'menu' ? 'close' : 'menu'
-            navLinks.classList.toggle('top-[12%]')
-            navLinks.classList.toggle('bg-white/50')
+            navLinks.classList.toggle('top-[9%]')
+            navLinks.classList.toggle('bg-white')
         }
 
         function onClickLogin() {
-            window.location.href = "../Login.aspx";
+            window.location.href = "../Res/Login.aspx";
         }
     </script>
 
