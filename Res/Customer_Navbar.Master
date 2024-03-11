@@ -1,0 +1,81 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Customer_Navbar.master.cs" Inherits="OMSMS6.Res.Customer_Navbar" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%-- Tailwind CSS CDN --%>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <%-- Ionicons Links --%>
+    <script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"></script>
+
+    <%-- Favicon --%>
+    <link rel="icon" href="Images/logo.png" type="image/png">
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="font-[Poppins] bg-gradient-to-t from-[#fbc2eb] to-[#a6c1ee] h-screen">
+    <header class="bg-white/50">
+        <nav class="flex justify-between items-center w-[92%]  mx-auto">
+            <div>
+                <a href="Default.aspx">
+                    <img class="w-16 cursor-pointer" src="../wwwroot/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div
+                class="nav-links duration-500 lg:static absolute lg:min-h-fit min-h-[60vh] left-0 top-[-100%] lg:w-auto w-full flex items-center justify-center px-5">
+                <ul class="flex text-lg lg:flex-row flex-col lg:items-center lg:gap-[4vw] gap-8">
+                    <li>
+                        <a class="hover:text-gray-500" href="Default.aspx">Home</a>
+                    </li>
+                    <li>
+                        <a class="hover:text-gray-500" href="#">Products</a>
+                    </li>
+                    <li>
+                        <a class="hover:text-gray-500" href="#">Orders</a>
+                    </li>
+                    <li>
+                        <a class="hover:text-gray-500" href="#">About us</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="flex items-center gap-6">
+                <asp:HyperLink ID="HyperLink1" runat="server" CssClass="text-3xl pt-2 hover:text-gray-500 cursor-pointer">
+                    <ion-icon name="cart"></ion-icon>
+                </asp:HyperLink>
+                <button onclick="onClickLogin()" class=" bg-[#87acec] text-white px-5 py-2 rounded-full hover:bg-[#a6c1ee]">Sign in</button>
+                <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-3xl cursor-pointer lg:hidden"></ion-icon>
+            </div>
+        </nav>
+    </header>
+
+    <form id="form1" runat="server">
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+    <script>
+        const navLinks = document.querySelector('.nav-links')
+        function onToggleMenu(e) {
+            e.name = e.name === 'menu' ? 'close' : 'menu'
+            navLinks.classList.toggle('top-[12%]')
+            navLinks.classList.toggle('bg-white/50')
+        }
+
+        function onClickLogin() {
+            window.location.href = "../Login.aspx";
+        }
+    </script>
+
+    <%-- Flowbite JS --%>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+</body>
+</html>
+
