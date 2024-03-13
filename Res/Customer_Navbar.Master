@@ -20,8 +20,8 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body class="font-[Poppins] bg-gradient-to-t from-[#fbc2eb] to-[#a6c1ee] h-screen">
-    <header class="bg-white/50">
+<body class="font-[Poppins] bg-gray-700 h-screen">
+    <header class="bg-white">
         <nav class="flex justify-between items-center w-[92%]  mx-auto">
             <div>
                 <a href="Default.aspx">
