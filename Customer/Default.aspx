@@ -154,7 +154,16 @@
         <!--  carousel of top 7 products -->
 
         <section>
-            <h1>SHOP BY CATEGORIES</h1>
+            <header class="text-center">
+                <h2 class="text-xl  my-8 font-bold text-gray-900 sm:text-3xl">Top Categories</h2>
+            
+                <p class="mx-auto mt-4 max-w-md text-gray-500">
+   Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque praesentium cumque iure
+   dicta incidunt est ipsam, officia dolor fugit natus?
+ </p>
+            </header>
+
+
 
             <div class="carousel carousel-center max-8 mx-8 max-w-full p-4 space-x-4  rounded-box">
 

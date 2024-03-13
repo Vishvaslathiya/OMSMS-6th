@@ -46,7 +46,7 @@
                 </ul>
             </div>
             <div class="flex items-center gap-6">
-                <asp:HyperLink ID="HyperLink1" runat="server" CssClass="text-3xl pt-2 hover:text-gray-500 cursor-pointer">
+                <asp:HyperLink ID="HyperLink1"  runat="server" NavigateUrl="~/Customer/Cart.aspx" CssClass="text-3xl pt-2 hover:text-gray-500 cursor-pointer">
                     <ion-icon name="cart"></ion-icon>
                 </asp:HyperLink>
                 <button onclick="onClickLogin()" class=" bg-[#87acec] text-white px-5 py-2 rounded-full hover:bg-[#a6c1ee]">Sign in</button>
@@ -54,6 +54,8 @@
             </div>
         </nav>
     </header>
+
+
 
     <form id="form1" runat="server">
         <div>

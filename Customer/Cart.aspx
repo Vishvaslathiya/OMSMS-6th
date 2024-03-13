@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Res/Customer_Navbar.Master" AutoEventWireup="true" CodeBehind="Checkout.aspx.cs" Inherits="OMSMS6.Customer.Checkout" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Res/Customer_Navbar.Master" AutoEventWireup="true" CodeBehind="Cart.aspx.cs" Inherits="OMSMS6.Customer.Checkout" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -65,6 +65,8 @@
                     </button>
                 </div>
             </div>
+
+
         </div>
 
         <!-- Purchase Resume -->
@@ -84,11 +86,7 @@
                     </div>
                 </div>
                 <hr class="bg-gray-200 h-0.5">
-                <div class="flex flex-row justify-between">
-                    <p class="text-gray-600">Discount Coupon</p>
-                    <a class="text-gray-500 text-base underline" href="#">Add</a>
-                </div>
-                <hr class="bg-gray-200 h-0.5">
+                 
                 <div class="flex flex-row justify-between">
                     <p class="text-gray-600">Total</p>
                     <div>
@@ -96,7 +94,23 @@
                     </div>
                 </div>
                 <div class="flex gap-2">
-                         <asp:Button ID="btnOrderNow" runat="server" Text="Order Now" Class="px-8 bg-indigo-500 py-2 text-white text-sm font-medium rounded hover:bg-indigo-700 focus:outline-none focus:bg-indigo-800"   />
+<div class="flex gap-2">
+   <div class="flex gap-2">
+    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Customer/Default.aspx" CssClass="px-8 text-sm bg-indigo-500 text-white text-sm font-medium rounded hover:bg-indigo-700 focus:outline-none focus:bg-indigo-800  pt-2 hover:text-white cursor-pointer w-32 bg-blue-500 text-white px-4 py-2 rounded">
+    Order Now
+</asp:HyperLink>
+
+   <!-- <asp:Button ID="btnOrderNow" runat="server" Text="Order Now" CssClass="px-8 bg-indigo-500 py-2 text-white text-sm font-medium rounded hover:bg-indigo-700 focus:outline-none focus:bg-indigo-800" OnClientClick="redirectToDefault(); return false;" />-->
+</div>
+
+<script type="text/javascript">
+    function redirectToDefault() {
+        window.location.href = '<%= ResolveUrl("~/Customer/Default.aspx") %>';
+    }
+</script>
+
+</div>
+
                     <button class="transition-colors text-sm bg-white border border-gray-600 p-2 rounded-sm w-full text-gray-700 text-hover shadow-md">
                         ADD MORE PRODUCTS
                     </button>
