@@ -178,9 +178,21 @@
                                 <input type="text" placeholder="Zip Code"
                                     class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
                             </div>
+
+                            <div class="mt-6">
+                                <h3 class="text-lg font-bold text-[#333] mb-6">Payment Method</h3>
+                                <div class="flex items-center gap-6">
+                                    <asp:RadioButton ID="credit" runat="server" GroupName="payment" CssClass="w-4 h-4 rounded-full bg-white border-2 text-green-400 border-[#333]" />
+                                    <asp:RadioButton ID="paypal" runat="server" GroupName="payment" CssClass="w-4 h-4 rounded-full bg-white border-2 text-green-400 border-[#333]" />
+                                </div>
+                            </div>
+
+
                             <div class="flex gap-6 max-sm:flex-col mt-10">
                                 <button type="button" class="rounded-md px-6 py-3 w-full text-sm text-black font-semibold bg-white-700 hover:bg-red-400 border-2  ">Cancel</button>
-                                <button type="button" class="rounded-md px-6 py-3 w-full text-sm text-black font-semibold bg-white-500  hover:bg-green-700 hover:text-white">Complete Purchase</button>
+                                <asp:Button runat="server" CssClass="rounded-md px-6 py-3 w-full text-sm text-center bg-green-600 text-black font-semibold bg-white-500  hover:bg-green-700 hover:text-white" Text="Complete Purchase" />
+                                </asp:Button>
+                                
                             </div>
                         </div>
                     </form>

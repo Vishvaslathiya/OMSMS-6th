@@ -13,5 +13,23 @@ namespace OMSMS6.Customer
 
     public partial class CUst_View_All_Product
     {
+
+        /// <summary>
+        /// credit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton credit;
+
+        /// <summary>
+        /// paypal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton paypal;
     }
 }
