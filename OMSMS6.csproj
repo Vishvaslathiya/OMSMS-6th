@@ -70,8 +70,10 @@
     <Content Include="Customer\CUst_View_All_Product.aspx" />
     <Content Include="Customer\Default.aspx" />
     <Content Include="Customer\Registration.aspx" />
+    <Content Include="Customer\Registration_OTP.aspx" />
     <Content Include="Customer\View_Product_Details.aspx" />
     <Content Include="Customer\WebForm1.aspx" />
+    <Content Include="Links.ascx" />
     <Content Include="Res\CSS\Style.css" />
     <Content Include="Res\Images\logo.png" />
     <Content Include="Res\Images\shop-image.jpg" />
@@ -114,6 +116,13 @@
     <Compile Include="Customer\Registration.aspx.designer.cs">
       <DependentUpon>Registration.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Customer\Registration_OTP.aspx.cs">
+      <DependentUpon>Registration_OTP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Customer\Registration_OTP.aspx.designer.cs">
+      <DependentUpon>Registration_OTP.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Customer\View_Product_Details.aspx.cs">
       <DependentUpon>View_Product_Details.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -126,6 +135,13 @@
     </Compile>
     <Compile Include="Customer\WebForm1.aspx.designer.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Links.ascx.cs">
+      <DependentUpon>Links.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Links.ascx.designer.cs">
+      <DependentUpon>Links.ascx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Res\Customer_Footer.Master.cs">

@@ -1,11 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="OMSMS6.Res.Login" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Registration_OTP.aspx.cs" Inherits="OMSMS6.Customer.Registration_OTP" %>
 
 <%@ Register Src="~/Links.ascx" TagName="Links" TagPrefix="omsms" %>
 <!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>OMSMS | Login</title>
-
+    <title>OMSMS | OTP Verification</title>
     <omsms:Links runat="server" />
 
     <!-- toastr -->
@@ -27,28 +27,27 @@
 
 
         $(document).ready(function () {
-            $("#loginForm").validate({
+            $("#registrationOTPForm").validate({
                 rules: {
-                    txtEmail: {
+                    txtOTP: {
                         required: true,
-                        email: true,
-                    },
-                    txtPassword: {
-                        required: true,
+                        number: true,
+                        maxlength: 6,
+                        minlength: 6,
                     },
                 },
                 messages: {
-                    txtEmail: {
-                        required: "Please Enter Email!",
-                        email: "Please Enter Valid Email!",
-                    },
-                    txtPassword: {
-                        required: "Please Enter Password!",
+                    txtOTP: {
+                        required: "Please Enter OTP!",
+                        number: "Please Enter Valid OTP!",
+                        maxlength: "Please Enter 6 Digits of OTP!",
+                        minlength: "Please Enter 6 Digits of OTP!",
                     },
                 },
             });
         });
     </script>
+
 </head>
 <body>
     <div class="py-16">
@@ -62,43 +61,25 @@
                     <ion-icon onclick="onClickClose()" name="close" class="text-2xl cursor-pointer"></ion-icon>
                 </div>
                 <h2 class="text-2xl font-semibold text-gray-700 text-center">OMSMS</h2>
-                <p class="text-xl text-gray-600 text-center">Welcome back!</p>
-                <%-- Login Form --%>
-                <form id="loginForm" runat="server">
+                <p class="text-xl text-gray-600 text-center">OTP Verification</p>
+
+                <%-- Registration OTP Form --%>
+                <form id="registrationOTPForm" runat="server">
 
                     <%-- Email --%>
                     <div class="mt-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
-                        <asp:TextBox runat="server" ID="txtEmail" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" TextMode="Email" />
+                        <label class="block text-gray-700 text-sm font-bold mb-2">OTP [One Time Password]</label>
+                        <asp:TextBox runat="server" ID="txtOTP" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" />
                     </div>
 
-                    <%-- Password --%>
-                    <div class="mt-4">
-                        <div class="flex justify-between">
-                            <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-
-                            <%-- Forgot Password --%>
-                            <a href="ForgotPassword.aspx" class="text-xs text-gray-500 hover:text-cyan-600">Forget Password?</a>
-                        </div>
-                        <asp:TextBox runat="server" ID="txtPassword" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" TextMode="Password" />
-                    </div>
-
-                    <%-- Remember Me --%>
-                    <div class="mt-4 flex item-center space-x-3">
-                        <asp:CheckBox runat="server" ID="chbRemme"/>
-                        <label class="block text-gray-700 text-sm font-bold">Remember Me?</label>
-                    </div>
-
-                    <%-- Login Button --%>
+                    <%-- Verify Button --%>
                     <div class="mt-8">
-                        <asp:Button runat="server" ID="btnLogin" class="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600" Text="Login" OnClick="btnLogin_Click"></asp:Button>
+                        <asp:Button runat="server" ID="btnVerify" class="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600" OnClick="btnVerify_Click" Text="Verify"></asp:Button>
                     </div>
                 </form>
-
-                <%-- Signup Link --%>
                 <div class="mt-4 flex items-center justify-between">
                     <span class="border-b w-1/5 md:w-1/4"></span>
-                    <a href="../Customer/Registration.aspx" class="text-sm text-gray-500 uppercase hover:text-cyan-600">or sign up</a>
+                    <a href="../Customer/Registration.aspx" class="text-sm text-gray-500 uppercase hover:text-cyan-600">not recieved OTP?</a>
                     <span class="border-b w-1/5 md:w-1/4"></span>
                 </div>
             </div>
