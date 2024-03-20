@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,7 +12,10 @@ namespace OMSMS6.Customer
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+           
+            // SqlConnection connection = new SqlConnection("Data Source=;Initial Catalog=OMSMS;Integrated Security=True");
         }
+
+      
     }
 }

@@ -109,8 +109,7 @@
                             <h3 class="text-lg font-bold text-[#333] mb-6">Personal Details</h3>
                             <div class="grid sm:grid-cols-2 gap-6">
                                 <div class="relative flex items-center">
-                                    <input type="text" placeholder="First Name"
-                                        class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
+                                    <asp:TextBox  placeholder="First Name" id="txtfname"   runat="server"  class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none"></asp:TextBox>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-4"
                                         viewBox="0 0 24 24">
                                         <circle cx="10" cy="7" r="6" data-original="#000000"></circle>
@@ -178,9 +177,23 @@
                                 <input type="text" placeholder="Zip Code"
                                     class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
                             </div>
+
+                            <div class="mt-6">
+                                <h3 class="text-lg font-bold text-[#333] mb-6">Payment Method</h3>
+                                <div class="flex items-center gap-6">
+                                    <asp:RadioButton ID="COD" runat="server" GroupName="payment" CssClass="  rounded-full bg-white   text-green-400 " />COD
+       
+                                    <asp:RadioButton ID="online" runat="server" GroupName="payment" CssClass=" rounded-full bg-white   text-green-400  " />Online
+   
+                                </div>
+                            </div>
+
+
+
                             <div class="flex gap-6 max-sm:flex-col mt-10">
                                 <button type="button" class="rounded-md px-6 py-3 w-full text-sm text-black font-semibold bg-white-700 hover:bg-red-400 border-2  ">Cancel</button>
-                                <button type="button" class="rounded-md px-6 py-3 w-full text-sm text-black font-semibold bg-white-500  hover:bg-green-700 hover:text-white">Complete Purchase</button>
+                                <asp:Button runat="server" class="rounded-md px-6 py-3 w-full text-sm text-center bg-green-600 text-black font-semibold bg-white-500  hover:bg-green-700 hover:text-white" Text="Complete Purchase" ID="btn_confirm_order" OnClick="placeorder_address" />
+                                 
                             </div>
                         </div>
                     </form>

@@ -11,43 +11,34 @@ namespace OMSMS6.Customer
 {
 
 
-    public partial class CUst_View_All_Product
+    public partial class Registration_OTP
     {
 
         /// <summary>
-        /// txtfname control.
+        /// registrationOTPForm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtfname;
+        protected global::System.Web.UI.HtmlControls.HtmlForm registrationOTPForm;
 
         /// <summary>
-        /// COD control.
+        /// txtOTP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton COD;
+        protected global::System.Web.UI.WebControls.TextBox txtOTP;
 
         /// <summary>
-        /// online control.
+        /// btnVerify control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton online;
-
-        /// <summary>
-        /// btn_confirm_order control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_confirm_order;
+        protected global::System.Web.UI.WebControls.Button btnVerify;
     }
 }
