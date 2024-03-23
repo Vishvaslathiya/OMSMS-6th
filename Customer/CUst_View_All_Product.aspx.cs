@@ -13,5 +13,10 @@ namespace OMSMS6.Customer
         {
 
         }
+
+        protected void placeorder_address(object sender, EventArgs e)
+        {
+            Response.Write("<script>alert('Product added to cart')</script>");
+        }
     }
 }

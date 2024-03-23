@@ -12,7 +12,10 @@ namespace OMSMS6.Customer
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            SqlConnection connection = new SqlConnection("Data Source=;Initial Catalog=OMSMS;Integrated Security=True");
+           
+            // SqlConnection connection = new SqlConnection("Data Source=;Initial Catalog=OMSMS;Integrated Security=True");
         }
+
+      
     }
 }
