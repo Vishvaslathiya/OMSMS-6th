@@ -67,6 +67,7 @@
   <ItemGroup>
     <Content Include="Customer\Cart.aspx" />
     <Content Include="Customer\Customer_Checkout.aspx" />
+    <Content Include="Customer\Cust_Order_Bill.aspx" />
     <Content Include="Customer\CUst_View_All_Product.aspx" />
     <Content Include="Customer\Default.aspx" />
     <Content Include="Customer\Registration.aspx" />
@@ -94,6 +95,13 @@
     </Compile>
     <Compile Include="Customer\Customer_Checkout.aspx.designer.cs">
       <DependentUpon>Customer_Checkout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Customer\Cust_Order_Bill.aspx.cs">
+      <DependentUpon>Cust_Order_Bill.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Customer\Cust_Order_Bill.aspx.designer.cs">
+      <DependentUpon>Cust_Order_Bill.aspx</DependentUpon>
     </Compile>
     <Compile Include="Customer\CUst_View_All_Product.aspx.cs">
       <DependentUpon>CUst_View_All_Product.aspx</DependentUpon>
