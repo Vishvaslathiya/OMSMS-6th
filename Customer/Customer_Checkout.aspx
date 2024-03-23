@@ -167,6 +167,7 @@
                         </div>
                         <div class="mt-6">
                             <h3 class="text-lg font-bold text-[#333] mb-6">Shipping Address</h3>
+<<<<<<< HEAD
                             <div class="grid sm:grid-cols-2 gap-6">
                                 <asp:TextBox ID="txtAddressLine" runat="server" CssClass="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" placeholder="Address Line"></asp:TextBox>
                                 <asp:TextBox ID="txtCity" runat="server" CssClass="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" placeholder="City"></asp:TextBox>
@@ -187,6 +188,14 @@
 
 
 
+=======
+                           <div class="grid sm:grid-cols-2 gap-6">
+            <asp:TextBox ID="txtAddressLine" runat="server" CssClass="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" placeholder="Address Line"></asp:TextBox>
+            <asp:TextBox ID="txtCity" runat="server" CssClass="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" placeholder="City"></asp:TextBox>
+            <asp:TextBox ID="txtState" runat="server" CssClass="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" placeholder="State"></asp:TextBox>
+            <asp:TextBox ID="txtZipCode" runat="server" CssClass="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" placeholder="Zip Code"></asp:TextBox>
+        </div>
+>>>>>>> a2fc550e8e77ff51a0bf77247c88916bf0fa2127
                             <div class="flex gap-6 max-sm:flex-col mt-10">
                                 <button type="button" class="rounded-md px-6 py-3 w-full text-sm text-black font-semibold bg-white-700 hover:bg-red-400 border-2  ">Cancel</button>
 
