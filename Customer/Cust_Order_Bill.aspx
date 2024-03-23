@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Res/Customer_Navbar.Master" AutoEventWireup="true"
+<%@ Page Title="" Language="C#" MasterPageFile="~/Res/Customer_Navbar.Master" AutoEventWireup="true"
     CodeBehind="Cust_Order_Bill.aspx.cs" %>
 
     <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
