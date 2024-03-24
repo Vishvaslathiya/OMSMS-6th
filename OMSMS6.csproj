@@ -68,12 +68,12 @@
     <Content Include="Customer\Cart.aspx" />
     <Content Include="Customer\Customer_Checkout.aspx" />
     <Content Include="Customer\Cust_Order_Bill.aspx" />
-    <Content Include="Customer\CUst_View_All_Product.aspx" />
+    <Content Include="Customer\Cust_View_All_Product.aspx" />
+    <Content Include="Customer\Cust_View_Product_Details.aspx" />
     <Content Include="Customer\Default.aspx" />
     <Content Include="Customer\Registration.aspx" />
     <Content Include="Customer\Registration_OTP.aspx" />
     <Content Include="Customer\View_Product_Details.aspx" />
-    <Content Include="Customer\WebForm1.aspx" />
     <Content Include="Links.ascx" />
     <Content Include="Res\CSS\Style.css" />
     <Content Include="Res\Images\logo.png" />
@@ -103,12 +103,19 @@
     <Compile Include="Customer\Cust_Order_Bill.aspx.designer.cs">
       <DependentUpon>Cust_Order_Bill.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Customer\CUst_View_All_Product.aspx.cs">
-      <DependentUpon>CUst_View_All_Product.aspx</DependentUpon>
+    <Compile Include="Customer\Cust_View_All_Product.aspx.cs">
+      <DependentUpon>Cust_View_All_Product.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Customer\CUst_View_All_Product.aspx.designer.cs">
-      <DependentUpon>CUst_View_All_Product.aspx</DependentUpon>
+    <Compile Include="Customer\Cust_View_All_Product.aspx.designer.cs">
+      <DependentUpon>Cust_View_All_Product.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Customer\Cust_View_Product_Details.aspx.cs">
+      <DependentUpon>Cust_View_Product_Details.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Customer\Cust_View_Product_Details.aspx.designer.cs">
+      <DependentUpon>Cust_View_Product_Details.aspx</DependentUpon>
     </Compile>
     <Compile Include="Customer\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -137,12 +144,6 @@
     </Compile>
     <Compile Include="Customer\View_Product_Details.aspx.designer.cs">
       <DependentUpon>View_Product_Details.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Customer\WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Customer\WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
     <Compile Include="Links.ascx.cs">
       <DependentUpon>Links.ascx</DependentUpon>

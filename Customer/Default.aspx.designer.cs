@@ -13,5 +13,14 @@ namespace OMSMS6.Customer
 
     public partial class Default
     {
+
+        /// <summary>
+        /// btnViewMore control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnViewMore;
     }
 }

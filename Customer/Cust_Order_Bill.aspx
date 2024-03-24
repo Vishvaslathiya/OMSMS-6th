@@ -1,5 +1,6 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Res/Customer_Navbar.Master" AutoEventWireup="true"
-    CodeBehind="Cust_Order_Bill.aspx.cs" %>
+    CodeBehind="Cust_Order_Bill.aspx.cs" Inherits="OMSMS6.Customer.Cust_Order_Bill" %>
+ 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
@@ -193,7 +194,7 @@
                             </div>
 
                             <div class="col-span-2">
-                                <asp:Label ID="prd_price" CssClass="font-medium" runat="server" Text="$300">
+                                <asp:Label ID="prd_price" CssClass="font-medium" runat="server" Text="300">
                                 </asp:Label>
                             </div>
 
