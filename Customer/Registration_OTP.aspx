@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Registration_OTP.aspx.cs" Inherits="OMSMS6.Customer.Registration_OTP" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Registration_OTP.aspx.cs" Inherits="OMSMS6.Customer.Registration_OTP" %>
 
 <%@ Register Src="~/Links.ascx" TagName="Links" TagPrefix="omsms" %>
 <!DOCTYPE html>
@@ -8,24 +8,8 @@
     <title>OMSMS | OTP Verification</title>
     <omsms:Links runat="server" />
 
-    <!-- toastr -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <%-- Toastr Options --%>
+    <%-- Validating Input --%>
     <script>
-        toastr.options = {
-            "positionClass": "toast-top-center",
-            "timeOut": 2000, // 2 seconds
-            "extendedTimeOut": 1000, // 1 second extended time on hover
-            "closeButton": true,
-            "progressBar": true,
-            "debug": false,
-            "showDuration": 300,
-            "hideDuration": 1000,
-        };
-
-
         $(document).ready(function () {
             $("#registrationOTPForm").validate({
                 rules: {
@@ -40,8 +24,8 @@
                     txtOTP: {
                         required: "Please Enter OTP!",
                         number: "Please Enter Valid OTP!",
-                        maxlength: "Please Enter 6 Digits of OTP!",
-                        minlength: "Please Enter 6 Digits of OTP!",
+                        maxlength: "OTP must br 6 Digits long!",
+                        minlength: "OTP must br 6 Digits long!",
                     },
                 },
             });
