@@ -96,7 +96,7 @@
                 <div class="flex gap-2">
 <div class="flex gap-2">
    <div class="flex gap-2">
-    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Customer/Default.aspx" CssClass="px-8 text-sm bg-indigo-500 text-white text-sm font-medium rounded hover:bg-indigo-700 focus:outline-none focus:bg-indigo-800  pt-2 hover:text-white cursor-pointer w-32 bg-blue-500 text-white px-4 py-2 rounded">
+    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Customer/Customer_Checkout.aspx" CssClass="px-8 text-sm bg-indigo-500 text-white text-sm font-medium rounded hover:bg-indigo-700 focus:outline-none focus:bg-indigo-800  pt-2 hover:text-white cursor-pointer w-32 bg-blue-500 text-white px-4 py-2 rounded">
     Order Now
 </asp:HyperLink>
 
