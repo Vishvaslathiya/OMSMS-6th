@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="OMSMS6.Res.Login" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="OMSMS6.Res.Login" %>
 
 <%@ Register Src="~/Links.ascx" TagName="Links" TagPrefix="omsms" %>
 <!DOCTYPE html>
@@ -8,24 +8,8 @@
 
     <omsms:Links runat="server" />
 
-    <!-- toastr -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <%-- Toastr Options --%>
+    <%-- Validating Input --%>
     <script>
-        toastr.options = {
-            "positionClass": "toast-top-center",
-            "timeOut": 2000, // 2 seconds
-            "extendedTimeOut": 1000, // 1 second extended time on hover
-            "closeButton": true,
-            "progressBar": true,
-            "debug": false,
-            "showDuration": 300,
-            "hideDuration": 1000,
-        };
-
-
         $(document).ready(function () {
             $("#loginForm").validate({
                 rules: {
@@ -40,7 +24,7 @@
                 messages: {
                     txtEmail: {
                         required: "Please Enter Email!",
-                        email: "Please Enter Valid Email!",
+                        email: "Please Enter a valid Email!",
                     },
                     txtPassword: {
                         required: "Please Enter Password!",
@@ -78,14 +62,14 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
 
                             <%-- Forgot Password --%>
-                            <a href="ForgotPassword.aspx" class="text-xs text-gray-500 hover:text-cyan-600">Forget Password?</a>
+                            <a href="Forgot_Password.aspx" class="text-xs text-gray-500 hover:text-cyan-600">Forget Password?</a>
                         </div>
                         <asp:TextBox runat="server" ID="txtPassword" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" TextMode="Password" />
                     </div>
 
                     <%-- Remember Me --%>
                     <div class="mt-4 flex item-center space-x-3">
-                        <asp:CheckBox runat="server" ID="chbRemme"/>
+                        <asp:CheckBox runat="server" ID="chbRemme" />
                         <label class="block text-gray-700 text-sm font-bold">Remember Me?</label>
                     </div>
 
