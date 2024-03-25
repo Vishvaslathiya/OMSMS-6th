@@ -80,7 +80,6 @@ namespace OMSMS6.Res
                             Session["uid"] = dr["id"];
                             conn.Close();
                             Response.Redirect("~/Customer/Default.aspx");
-                            //Response.Redirect("~/Customer/Registration.aspx");
                         }
                     }
                     else

@@ -75,10 +75,15 @@
     <Content Include="Customer\Registration_OTP.aspx" />
     <Content Include="Customer\View_Product_Details.aspx" />
     <Content Include="Links.ascx" />
+    <Content Include="Res\Change_Password.aspx" />
     <Content Include="Res\CSS\Style.css" />
+    <Content Include="Res\Edit_Profile.aspx" />
+    <Content Include="Res\Forgot_Password.aspx" />
+    <Content Include="Res\Forgot_Password_OTP.aspx" />
     <Content Include="Res\Images\logo.png" />
     <Content Include="Res\Images\shop-image.jpg" />
     <Content Include="Res\Login.aspx" />
+    <Content Include="Res\SignOut.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +158,13 @@
       <DependentUpon>Links.ascx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Res\Change_Password.aspx.cs">
+      <DependentUpon>Change_Password.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Res\Change_Password.aspx.designer.cs">
+      <DependentUpon>Change_Password.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Res\Customer_Footer.Master.cs">
       <DependentUpon>Customer_Footer.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -167,12 +179,40 @@
     <Compile Include="Res\Customer_Navbar.Master.designer.cs">
       <DependentUpon>Customer_Navbar.Master</DependentUpon>
     </Compile>
+    <Compile Include="Res\Edit_Profile.aspx.cs">
+      <DependentUpon>Edit_Profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Res\Edit_Profile.aspx.designer.cs">
+      <DependentUpon>Edit_Profile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Res\Forgot_Password.aspx.cs">
+      <DependentUpon>Forgot_Password.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Res\Forgot_Password.aspx.designer.cs">
+      <DependentUpon>Forgot_Password.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Res\Forgot_Password_OTP.aspx.cs">
+      <DependentUpon>Forgot_Password_OTP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Res\Forgot_Password_OTP.aspx.designer.cs">
+      <DependentUpon>Forgot_Password_OTP.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Res\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Res\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Res\SignOut.aspx.cs">
+      <DependentUpon>SignOut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Res\SignOut.aspx.designer.cs">
+      <DependentUpon>SignOut.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OMSMS6.Customer
+namespace OMSMS6.Res
 {
 
 
-    public partial class Default
+    public partial class SignOut
     {
     }
 }
