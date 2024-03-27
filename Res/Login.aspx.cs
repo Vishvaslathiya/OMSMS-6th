@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,6 +18,11 @@ namespace OMSMS6.Res
             if (!IsPostBack)
             {
                 ClientScript.RegisterStartupScript(this.GetType(), "ToastrScript", "", true);
+                if (Request.Cookies["Email"] != null && Request.Cookies["Password"] != null)
+                {
+                    txtEmail.Text = Request.Cookies["Email"].Value;
+                    txtPassword.Attributes["value"] = Request.Cookies["Password"].Value;
+                }
             }
         }
 
@@ -43,8 +48,8 @@ namespace OMSMS6.Res
                         Response.Cookies["Password"].Value = password;
 
                         // Setting Cookies Time-Out
-                        Response.Cookies["Email"].Expires = DateTime.Now.AddDays(30);
-                        Response.Cookies["Password"].Expires = DateTime.Now.AddDays(30);
+                        Response.Cookies["Email"].Expires = DateTime.Now.AddDays(7);
+                        Response.Cookies["Password"].Expires = DateTime.Now.AddDays(7);
                     }
 
                     SHA256 sha256 = SHA256.Create();
@@ -60,14 +65,20 @@ namespace OMSMS6.Res
 
                     if (dr["password"].ToString() == hashedPassword)
                     {
-                        if (dr["role"].Equals("admin"))
+                        if ((int)dr["role"] == 0)
                         {
                             Session["AdminEmail"] = dr["email"].ToString();
+                            Session["name"] = dr["name"].ToString();
+                            Session["uid"] = dr["id"].ToString();
+                            conn.Close();
                             Response.Redirect("~/Customer/Default.aspx");
                         }
                         else
                         {
                             Session["Email"] = dr["email"].ToString();
+                            Session["name"] = dr["name"].ToString();
+                            Session["uid"] = dr["id"];
+                            conn.Close();
                             Response.Redirect("~/Customer/Default.aspx");
                         }
                     }

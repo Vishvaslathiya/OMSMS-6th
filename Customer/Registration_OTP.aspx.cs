@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -15,7 +15,8 @@ namespace OMSMS6.Customer
         {
             if (!IsPostBack)
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "ToastrScript", "", true);
+                //ClientScript.RegisterStartupScript(this.GetType(), "ToastrScript", "", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "SuccessScript", "toastr.success('OTP sent on your Email Address!')", true);
             }
 
             if (Session["OTP"] != null)
@@ -54,7 +55,7 @@ namespace OMSMS6.Customer
                 insertUser.Parameters.AddWithValue("@gender", gender);
                 insertUser.Parameters.AddWithValue("@city", city);
                 insertUser.Parameters.AddWithValue("@address", address);
-                insertUser.Parameters.AddWithValue("@role", "customer");
+                insertUser.Parameters.AddWithValue("@role", 1);
                 insertUser.Parameters.AddWithValue("@status", 1);
 
                 int isInserted = insertUser.ExecuteNonQuery();
