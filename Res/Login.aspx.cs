@@ -69,9 +69,9 @@ namespace OMSMS6.Res
                         {
                             Session["AdminEmail"] = dr["email"].ToString();
                             Session["name"] = dr["name"].ToString();
-                            Session["uid"] = dr["id"].ToString();
+                            Session["aid"] = dr["id"].ToString();
                             conn.Close();
-                            Response.Redirect("~/Customer/Default.aspx");
+                            Response.Redirect("~/Admin/Default.aspx");
                         }
                         else
                         {

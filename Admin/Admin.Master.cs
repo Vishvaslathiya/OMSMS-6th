@@ -11,7 +11,16 @@ namespace OMSMS6.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["AdminEmail"] == null)
+            {
+                Response.Redirect("../Customer/Default.aspx");
+            }
         }
+        //protected void btnSignout_Click(object sender, EventArgs e)
+        //{
+        //    Session.RemoveAll();
+        //    Response.Write("<script>alert('Logged Out Successfully!'); window.location='../Customer/Default.aspx';</script>");
+        //    //Response.Redirect("../Customer/Default.aspx");
+        //}
     }
 }

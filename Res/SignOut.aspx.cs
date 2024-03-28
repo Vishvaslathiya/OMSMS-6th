@@ -11,14 +11,17 @@ namespace OMSMS6.Res
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["sid"].Equals("1"))
-            {
-                Session.RemoveAll();
-                Response.Redirect("~/Customer/Default.aspx");
-            } else
-            {
-                Response.Redirect("~/Customer/Default.aspx");
-            }
+            //if (Session["sid"].Equals("1"))
+            //{
+            //    Session.RemoveAll();
+            //    Response.Redirect("~/Customer/Default.aspx");
+            //} else
+            //{
+            //    Response.Redirect("~/Customer/Default.aspx");
+            //}
+
+            Session.RemoveAll();
+            Response.Write("<script>alert('Logged Out Successfully!'); window.location='../Customer/Default.aspx';</script>");
         }
     }
 }

@@ -14,11 +14,12 @@ namespace OMSMS6.Res
 
         }
 
-        protected void btnSignout_Click(object sender, EventArgs e)
-        {
-            Session.RemoveAll();
-            Response.Write("<script>alert('Logged Out Successfully!'); window.location='../Customer/Default.aspx';</script>");
-            //Response.Redirect("../Customer/Default.aspx");
-        }
+        //protected void btnSignout_Click(object sender, EventArgs e)
+        //{
+        //    Session.RemoveAll();
+        //    Response.Write("<script>alert('Logged Out Successfully!'); window.location='../Customer/Default.aspx';</script>");
+        //    //Response.Redirect("../Customer/Default.aspx");
+        //}
+        //}https://localhost:44326/Res/Customer_Navbar.Master.cs
     }
 }

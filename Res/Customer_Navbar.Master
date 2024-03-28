@@ -64,19 +64,24 @@
                         <div><%= Session["name"].ToString() %></div>
                         <div class="font-medium truncate"><%= Session["Email"].ToString() %></div>
                     </div>
-                    <form runat="server">
+                    <%--<form runat="server">--%>
+                    <div>
                         <ul class="py-2 text-sm text-gray-900" aria-labelledby="profile">
                             <li>
-                                <asp:LinkButton runat="server" href="../Res/Edit_Profile.aspx" class="block px-4 py-2  hover:text-white hover:bg-gray-600">Edit Profile</asp:LinkButton>
+                                <%--<asp:LinkButton runat="server" href="../Res/Edit_Profile.aspx" class="block px-4 py-2  hover:text-white hover:bg-gray-600">Edit Profile</asp:LinkButton>--%>
+                                <a href="../Res/Edit_Profile.aspx" class="block px-4 py-2  hover:text-white hover:bg-gray-600">Edit Profile</a>
                             </li>
                             <li>
-                                <asp:LinkButton runat="server" href="../Res/Change_Password.aspx" class="block px-4 py-2  hover:text-white hover:bg-gray-600">Change Password</asp:LinkButton>
+                                <%--<asp:LinkButton runat="server" href="../Res/Change_Password.aspx" class="block px-4 py-2  hover:text-white hover:bg-gray-600">Change Password</asp:LinkButton>--%>
+                                <a href="../Res/Change_Password.aspx" class="block px-4 py-2  hover:text-white hover:bg-gray-600">Change Password</a>
                             </li>
                         </ul>
                         <div class="py-1">
-                            <asp:Button runat="server" ID="btnSignout" class="block px-4 py-2 text-sm text-gray-700 dark:hover:bg-gray-600 hover:text-white w-full text-left" OnClick="btnSignout_Click" Text="Sign out" />
+                            <%--<asp:Button runat="server" ID="btnSignout" class="block px-4 py-2 text-sm text-gray-700 dark:hover:bg-gray-600 hover:text-white w-full text-left" OnClick="btnSignout_Click" Text="Sign out" />--%>
+                            <a href="SignOut.aspx" class="block px-4 py-2 text-sm text-gray-700 dark:hover:bg-gray-600 hover:text-white w-full text-left">Sign Out</a>
                         </div>
-                    </form>
+                    </div>
+                    <%--</form>--%>
                 </div>
 
                 <% } %>

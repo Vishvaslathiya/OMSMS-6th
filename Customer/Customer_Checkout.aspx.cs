@@ -25,7 +25,7 @@ namespace OMSMS6.Customer
         {
             // Alert the user that the order has been confirmed
             Response.Write("<script>alert('Order has been confirmed!');</script>");
-            String address = txt_cust_address.Text;
+            // String address = txt_cust_address.Text;
 
         }
 

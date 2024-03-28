@@ -1,17 +1,13 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Admin.master.cs" Inherits="OMSMS6.Admin.Admin" %>
+
 <%@ Register Src="~/Links.ascx" TagName="Links" TagPrefix="omsms" %>
 <!DOCTYPE html>
 
 <html>
 <head runat="server">
-<<<<<<< HEAD
     <title></title>
-    <omsms:Links runat="server" />
-=======
-    <title>Admin</title>
     <link href="~/Res/Css/Admin_Css.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.0.1/css/ionicons.min.css" integrity="sha512-<SHA-HASH>" crossorigin="anonymous" />
->>>>>>> 499b83a877ddfd9ddc10d34fee71f6a18da2635d
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -21,7 +17,7 @@
     <div class="navigation">
         <ul>
             <li>
-                <a href="#">
+                <a href="Default.aspx">
                     <span class="icon">
                         <ion-icon name="logo-apple"></ion-icon>
                     </span>
@@ -30,7 +26,7 @@
             </li>
 
             <li>
-                <a href="#">
+                <a href="Default.aspx">
                     <span class="icon">
                         <ion-icon name="home-outline"></ion-icon>
                     </span>
@@ -39,11 +35,11 @@
             </li>
 
             <li>
-                <a href="#">
+                <a href="Users.aspx">
                     <span class="icon">
                         <ion-icon name="people-outline"></ion-icon>
                     </span>
-                    <span class="title">Customers</span>
+                    <span class="title">Users</span>
                 </a>
             </li>
 
@@ -83,21 +79,21 @@
                 </a>
             </li>
 
-            <li>
+            <%--<li>
                 <a href="#">
                     <span class="icon">
                         <ion-icon name="log-out-outline"></ion-icon>
                     </span>
                     <span class="title">Sign Out</span>
                 </a>
-            </li>
+            </li>--%>
         </ul>
     </div>
 
     <div class="main">
 
-        <div class="topbar">
-            <div class="toggle">
+        <div class="topbar bg-gray-700">
+            <div class="toggle text-white">
                 <ion-icon name="menu-outline"></ion-icon>
             </div>
 
@@ -108,19 +104,53 @@
                 </label>
             </div>
 
-            <div class="user">
-                <ion-icon name="person-circle-outline" style="font-size: 36px;"></ion-icon>
+            <%if (Session["AdminEmail"] == null)
+                {  %>
+            <button onclick="onClickLogin()" class=" bg-[#1F2833] text-white px-3 py-1 rounded-full hover:bg-[#C5C6C7]">Sign in</button>
+            <% }
+                else
+                {  %>
+            <div id="profile" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" class="hover:cursor-pointer relative w-7 h-7 bg-gray-100 rounded-full dark:bg-gray-600">
+                <svg viewBox="0 0 496 512" fill="white" xmlns="http://www.w3.org/2000/svg">
+                    <path d="m248 8c-137 0-248 111-248 248s111 248 248 248 248-111 248-248-111-248-248-248zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9s28-2.7 40.9-6.9c2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8-35.2 41.6-87.8 68.2-146.5 68.2z" />
+                </svg>
+                <span class="bottom-0 left-5 absolute  w-3 h-3 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
             </div>
+
+            <!-- Dropdown menu -->
+            <div id="userDropdown" class="z-10 hidden bg-white divide-y divide-gray-900 rounded-lg shadow w-54 ">
+                <div class="px-4 py-3 text-sm text-gray-900">
+                    <div><%= Session["name"].ToString() %></div>
+                    <div class="font-medium truncate"><%= Session["AdminEmail"].ToString() %></div>
+                </div>
+                <%--<form runat="server">--%>
+                <div>
+                    <ul class="py-2 text-sm text-gray-900" aria-labelledby="profile">
+                        <li>
+                            <%--<asp:LinkButton runat="server" href="../Admin/Edit_Profile.aspx" class="block px-4 py-2  hover:text-white hover:bg-gray-600">Edit Profile</asp:LinkButton>--%>
+                            <a href="../Admin/Edit_Profile.aspx" class="block px-4 py-2  hover:text-white hover:bg-gray-600">Edit Profile</a>
+                        </li>
+                        <li>
+                            <%--<asp:LinkButton runat="server" href="../Res/Change_Password.aspx" class="block px-4 py-2  hover:text-white hover:bg-gray-600">Change Password</asp:LinkButton>--%>
+                            <a href="../Res/Change_Password.aspx" class="block px-4 py-2  hover:text-white hover:bg-gray-600">Change Password</a>
+                        </li>
+                    </ul>
+                    <div class="py-1">
+                        <%--<asp:Button runat="server" ID="btnSignout" class="block px-4 py-2 text-sm text-gray-700 dark:hover:bg-gray-600 hover:text-white w-full text-left" OnClick="btnSignout_Click" Text="Sign out" />--%>
+                        <a href="../Res/SignOut.aspx" class="block px-4 py-2 text-sm text-gray-700 dark:hover:bg-gray-600 hover:text-white w-full text-left" >Sign Out</a>
+                    </div>
+                </div>
+                <%--</form>--%>
+            </div>
+
+            <% } %>
         </div>
     </div>
 
 
-    <form id="form1" runat="server">
-        <div>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
-        </div>
-    </form>
+
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+    </asp:ContentPlaceHolder>
 
     <!-- =========== Scripts =========  -->
     <script src="Res/js/main.js"></script>
@@ -128,6 +158,10 @@
     <!-- ====== ionicons ======= -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+    <%-- Flowbite JS --%>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 
 </body>
 </html>

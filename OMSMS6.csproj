@@ -65,7 +65,13 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\Add_Users.aspx" />
+    <Content Include="Admin\Add_User_OTP.aspx" />
+    <Content Include="Admin\Change_Password.aspx" />
     <Content Include="Admin\Default.aspx" />
+    <Content Include="Admin\Delete_User.aspx" />
+    <Content Include="Admin\Edit_Profile.aspx" />
+    <Content Include="Admin\Manage_User.aspx" />
     <Content Include="Admin\Users.aspx" />
     <Content Include="Admin\Res\Css\Admin_Css.css" />
     <Content Include="Admin\Res\Js\main.js" />
@@ -91,6 +97,20 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\Add_Users.aspx.cs">
+      <DependentUpon>Add_Users.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Add_Users.aspx.designer.cs">
+      <DependentUpon>Add_Users.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Add_User_OTP.aspx.cs">
+      <DependentUpon>Add_User_OTP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Add_User_OTP.aspx.designer.cs">
+      <DependentUpon>Add_User_OTP.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Admin.Master.cs">
       <DependentUpon>Admin.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -98,12 +118,40 @@
     <Compile Include="Admin\Admin.Master.designer.cs">
       <DependentUpon>Admin.Master</DependentUpon>
     </Compile>
+    <Compile Include="Admin\Change_Password.aspx.cs">
+      <DependentUpon>Change_Password.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Change_Password.aspx.designer.cs">
+      <DependentUpon>Change_Password.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Delete_User.aspx.cs">
+      <DependentUpon>Delete_User.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Delete_User.aspx.designer.cs">
+      <DependentUpon>Delete_User.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Edit_Profile.aspx.cs">
+      <DependentUpon>Edit_Profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Edit_Profile.aspx.designer.cs">
+      <DependentUpon>Edit_Profile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Manage_User.aspx.cs">
+      <DependentUpon>Manage_User.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Manage_User.aspx.designer.cs">
+      <DependentUpon>Manage_User.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Users.aspx.cs">
       <DependentUpon>Users.aspx</DependentUpon>

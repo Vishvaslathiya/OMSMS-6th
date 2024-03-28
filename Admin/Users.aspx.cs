@@ -13,9 +13,10 @@ namespace OMSMS6.Admin
         SqlConnection conn = new SqlConnection("Data Source = LAPTOP-SHON9L4N\\SQLEXPRESS; Initial Catalog=omsms; Integrated Security=True;");
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            if (!IsPostBack)
             {
                 bindAdmins();
+                bindCustomers();
             }
         }
 
@@ -23,10 +24,29 @@ namespace OMSMS6.Admin
         {
             conn.Close();
             conn.Open();
-            SqlCommand selectAdmins = new SqlCommand("SELECT * FROM tblUsers WHERE role = 1", conn);
+            SqlCommand selectAdmins = new SqlCommand("SELECT * FROM tblUsers WHERE role = 0", conn);
             SqlDataReader dr = selectAdmins.ExecuteReader();
-            rptAdmins.DataSource = dr;
-            rptAdmins.DataBind();
+            if (dr.HasRows)
+            {
+                rptAdmins.DataSource = dr;
+                rptAdmins.DataBind();
+            }
+            dr.Close();
+            conn.Close();
+        }
+
+        protected void bindCustomers()
+        {
+            conn.Close();
+            conn.Open();
+            SqlCommand selectCustomers = new SqlCommand("SELECT * FROM tblUsers WHERE role = 1", conn);
+            SqlDataReader dr = selectCustomers.ExecuteReader();
+            if (dr.HasRows)
+            {
+                rptCustomers.DataSource = dr;
+                rptCustomers.DataBind();
+            }
+            dr.Close();
             conn.Close();
         }
     }
