@@ -67,6 +67,7 @@
   <ItemGroup>
     <Content Include="Admin\Default.aspx" />
     <Content Include="Admin\Res\Css\Admin_Css.css" />
+    <Content Include="Admin\Res\Js\main.js" />
     <Content Include="Customer\Cart.aspx" />
     <Content Include="Customer\Customer_Checkout.aspx" />
     <Content Include="Customer\Cust_Order_Bill.aspx" />
