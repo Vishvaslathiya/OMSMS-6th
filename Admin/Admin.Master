@@ -1,10 +1,12 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Admin.master.cs" Inherits="OMSMS6.Admin.Admin" %>
-
+<%@ Register Src="~/Links.ascx" TagName="Links" TagPrefix="omsms" %>
 <!DOCTYPE html>
 
 <html>
 <head runat="server">
     <title></title>
+    <omsms:Links runat="server" />
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
