@@ -104,13 +104,7 @@
                 </label>
             </div>
 
-            <%if (Session["AdminEmail"] == null)
-                {  %>
-            <button onclick="onClickLogin()" class=" bg-[#1F2833] text-white px-3 py-1 rounded-full hover:bg-[#C5C6C7]">Sign in</button>
-            <% }
-                else
-                {  %>
-            <div id="profile" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" class="hover:cursor-pointer relative w-7 h-7 bg-gray-100 rounded-full dark:bg-gray-600">
+            <div id="profile" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" class="hover:cursor-pointer relative w-7 h-7 bg-gray-100 rounded-full mr-4 dark:bg-gray-600">
                 <svg viewBox="0 0 496 512" fill="white" xmlns="http://www.w3.org/2000/svg">
                     <path d="m248 8c-137 0-248 111-248 248s111 248 248 248 248-111 248-248-111-248-248-248zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9s28-2.7 40.9-6.9c2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8-35.2 41.6-87.8 68.2-146.5 68.2z" />
                 </svg>
@@ -120,7 +114,7 @@
             <!-- Dropdown menu -->
             <div id="userDropdown" class="z-10 hidden bg-white divide-y divide-gray-900 rounded-lg shadow w-54 ">
                 <div class="px-4 py-3 text-sm text-gray-900">
-                    <div><%= Session["name"].ToString() %></div>
+                    <div><%= Session["AdminName"].ToString() %></div>
                     <div class="font-medium truncate"><%= Session["AdminEmail"].ToString() %></div>
                 </div>
                 <%--<form runat="server">--%>
@@ -130,20 +124,18 @@
                             <%--<asp:LinkButton runat="server" href="../Admin/Edit_Profile.aspx" class="block px-4 py-2  hover:text-white hover:bg-gray-600">Edit Profile</asp:LinkButton>--%>
                             <a href="../Admin/Edit_Profile.aspx" class="block px-4 py-2  hover:text-white hover:bg-gray-600">Edit Profile</a>
                         </li>
-                        <li>
-                            <%--<asp:LinkButton runat="server" href="../Res/Change_Password.aspx" class="block px-4 py-2  hover:text-white hover:bg-gray-600">Change Password</asp:LinkButton>--%>
+                        <%--<li>
+                            <asp:LinkButton runat="server" href="../Res/Change_Password.aspx" class="block px-4 py-2  hover:text-white hover:bg-gray-600">Change Password</asp:LinkButton>
                             <a href="../Res/Change_Password.aspx" class="block px-4 py-2  hover:text-white hover:bg-gray-600">Change Password</a>
-                        </li>
+                        </li>--%>
                     </ul>
                     <div class="py-1">
                         <%--<asp:Button runat="server" ID="btnSignout" class="block px-4 py-2 text-sm text-gray-700 dark:hover:bg-gray-600 hover:text-white w-full text-left" OnClick="btnSignout_Click" Text="Sign out" />--%>
-                        <a href="../Res/SignOut.aspx" class="block px-4 py-2 text-sm text-gray-700 dark:hover:bg-gray-600 hover:text-white w-full text-left" >Sign Out</a>
+                        <a href="../Res/SignOut.aspx" class="block px-4 py-2 text-sm text-gray-700 dark:hover:bg-gray-600 hover:text-white w-full text-left">Sign Out</a>
                     </div>
                 </div>
                 <%--</form>--%>
             </div>
-
-            <% } %>
         </div>
     </div>
 

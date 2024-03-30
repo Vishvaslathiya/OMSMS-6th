@@ -1,4 +1,4 @@
-<%@ Page Title="OMSMS" Language="C#" MasterPageFile="~/Res/Customer_Navbar.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="OMSMS6.Customer.Default" %>
+<%@ Page Title="Online Mobile Shop" MasterPageFile="~/Res/Customer_Navbar.Master" Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="OMSMS6.Customer.Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <meta charset="UTF-8">

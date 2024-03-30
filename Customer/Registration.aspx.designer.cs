@@ -141,15 +141,6 @@ namespace OMSMS6.Customer
         protected global::System.Web.UI.WebControls.DropDownList ddlCity;
 
         /// <summary>
-        /// txtAddress control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAddress;
-
-        /// <summary>
         /// btnRegister control.
         /// </summary>
         /// <remarks>

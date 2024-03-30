@@ -68,7 +68,7 @@ namespace OMSMS6.Res
                         if ((int)dr["role"] == 0)
                         {
                             Session["AdminEmail"] = dr["email"].ToString();
-                            Session["name"] = dr["name"].ToString();
+                            Session["AdminName"] = dr["name"].ToString();
                             Session["aid"] = dr["id"].ToString();
                             conn.Close();
                             Response.Redirect("~/Admin/Default.aspx");

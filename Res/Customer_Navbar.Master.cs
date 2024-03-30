@@ -20,6 +20,6 @@ namespace OMSMS6.Res
         //    Response.Write("<script>alert('Logged Out Successfully!'); window.location='../Customer/Default.aspx';</script>");
         //    //Response.Redirect("../Customer/Default.aspx");
         //}
-        //}https://localhost:44326/Res/Customer_Navbar.Master.cs
+        //}
     }
 }

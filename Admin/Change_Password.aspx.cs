@@ -15,13 +15,13 @@ namespace OMSMS6.Admin
         SqlConnection conn = new SqlConnection("Data Source=LAPTOP-SHON9L4N\\SQLEXPRESS;Initial Catalog=omsms;Integrated Security=True;");
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["uid"] == null)
+            if (Session["aid"] == null)
             {
                 Response.Redirect("../Customer/Default.aspx");
             }
             else
             {
-                txtEmail.Text = Session["Email"].ToString();
+                txtEmail.Text = Session["AdminEmail"].ToString();
             }
         }
 
@@ -30,7 +30,7 @@ namespace OMSMS6.Admin
             conn.Close();
             conn.Open();
             SqlCommand selectUser = new SqlCommand("SELECT * FROM tblUsers WHERE id = @uid", conn);
-            selectUser.Parameters.AddWithValue("@uid", Session["uid"]);
+            selectUser.Parameters.AddWithValue("@uid", Session["aid"]);
             SqlDataReader dr = selectUser.ExecuteReader();
             if (dr.Read())
             {

@@ -96,7 +96,7 @@ namespace OMSMS6.Customer
                 gender = "Other";
             }
             String city = ddlCity.SelectedValue;
-            String address = txtAddress.Text;
+            //String address = txtAddress.Text;
 
             //String alert = "alert('" + name + ", " + email + ", " + contact + ", " + password + ", " + gender + ", " + city + ", " + address +"');";
             //ClientScript.RegisterStartupScript(this.GetType(), "alert", alert, true);
@@ -128,7 +128,7 @@ namespace OMSMS6.Customer
                 Session["password"] = hashedPassword;
                 Session["gender"] = gender;
                 Session["city"] = city;
-                Session["address"] = address;
+                //Session["address"] = address;
                 Session["OTP"] = OTP;
 
                 bool isSent = SendMail(email, OTP);

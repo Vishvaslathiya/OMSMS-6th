@@ -6,6 +6,7 @@
 
 <html>
 <head runat="server">
+    <title></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <omsms:Links runat="server" />
@@ -26,10 +27,10 @@
             <div class="nav-links duration-500 lg:static absolute lg:min-h-fit min-h-[60vh] left-0 top-[-100%] lg:w-auto w-full flex items-center justify-center px-5">
                 <ul class="flex text-lg lg:flex-row flex-col lg:items-center lg:gap-[4vw] gap-8">
                     <li>
-                        <a class="hover:text-gray-500 text-white" href="Default.aspx">Home</a>
+                        <a id="pageDefault" class='hover:text-gray-500 text-white' href="Default.aspx">Home</a>
                     </li>
                     <li>
-                        <a class="text-white hover:text-gray-500" href="#">Products</a>
+                        <a id="pageProducts" class="text-white hover:text-gray-500" href="#">Products</a>
                     </li>
                     <li>
                         <a class="text-white hover:text-gray-500" href="#">Orders</a>
@@ -46,7 +47,10 @@
 
                 <%if (Session["Email"] == null)
                     {  %>
-                <button onclick="onClickLogin()" class=" bg-[#1F2833] text-white px-3 py-1 rounded-full hover:bg-[#C5C6C7]">Sign in</button>
+                <div class="">
+                    <button onclick="onClickLogin()" class=" bg-[#1F2833] text-white px-3 py-1 rounded-l-full hover:bg-[#C5C6C7] hover:text-[#1F2833]">Sign in</button>
+                    <button onclick="onClickRegister()" class=" bg-[#1F2833] text-white px-3 py-1 rounded-r-full hover:bg-[#C5C6C7] hover:text-[#1F2833]">Sign up</button>
+                </div>
                 <% }
                     else
                     {  %>
@@ -78,7 +82,7 @@
                         </ul>
                         <div class="py-1">
                             <%--<asp:Button runat="server" ID="btnSignout" class="block px-4 py-2 text-sm text-gray-700 dark:hover:bg-gray-600 hover:text-white w-full text-left" OnClick="btnSignout_Click" Text="Sign out" />--%>
-                            <a href="SignOut.aspx" class="block px-4 py-2 text-sm text-gray-700 dark:hover:bg-gray-600 hover:text-white w-full text-left">Sign Out</a>
+                            <a href="../Res/SignOut.aspx" class="block px-4 py-2 text-sm text-gray-700 dark:hover:bg-gray-600 hover:text-white w-full text-left">Sign Out</a>
                         </div>
                     </div>
                     <%--</form>--%>
@@ -106,6 +110,10 @@
 
         function onClickLogin() {
             window.location.href = "../Res/Login.aspx";
+        }
+
+        function onClickRegister() {
+            window.location.href = "../Customer/Registration.aspx";
         }
     </script>
 

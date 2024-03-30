@@ -1,10 +1,8 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="OMSMS6.Res.Login" %>
+<%@ Page Title="OMSMS | Login" MasterPageFile="~/Res/Customer_Navbar.Master" Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="OMSMS6.Res.Login" %>
 
 <%@ Register Src="~/Links.ascx" TagName="Links" TagPrefix="omsms" %>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>OMSMS | Login</title>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
     <omsms:Links runat="server" />
 
@@ -13,28 +11,29 @@
         $(document).ready(function () {
             $("#loginForm").validate({
                 rules: {
-                    txtEmail: {
+                    ctl00$ContentPlaceHolder1$txtEmail: {
                         required: true,
                         email: true,
                     },
-                    txtPassword: {
+                    ctl00$ContentPlaceHolder1$txtPassword: {
                         required: true,
                     },
                 },
                 messages: {
-                    txtEmail: {
+                    ctl00$ContentPlaceHolder1$txtEmail: {
                         required: "Please Enter Email!",
                         email: "Please Enter a valid Email!",
                     },
-                    txtPassword: {
+                    ctl00$ContentPlaceHolder1$txtPassword: {
                         required: "Please Enter Password!",
                     },
                 },
             });
         });
     </script>
-</head>
-<body>
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="py-16">
         <div class="flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
             <div class="hidden lg:block lg:w-1/2 bg-cover"
@@ -93,5 +92,4 @@
             window.location.href = "../Customer/Default.aspx";
         }
     </script>
-</body>
-</html>
+</asp:Content>
