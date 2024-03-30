@@ -34,7 +34,7 @@ namespace OMSMS6.Res
             SqlDataReader dr = selectUser.ExecuteReader();
             if (dr.Read())
             {
-               
+
                 SqlCommand updatePassword = new SqlCommand("UPDATE tblUsers SET password = @password WHERE id = @uid", conn);
 
                 SHA256 sha256 = SHA256.Create();
@@ -75,7 +75,8 @@ namespace OMSMS6.Res
                     {
                         dr.Close();
                         conn.Close();
-                        Response.Write("<script>toastr.error('Error in Changing Password!')</script>");
+                        Response.Write("<script>alert('Error in Changing Password!'); </script>");
+                        //Response.Write("<script>toastr.error('Error in Changing Password!')</script>");
                     }
                     //Response.Redirect("../Customer/Default.aspx");
                 }
