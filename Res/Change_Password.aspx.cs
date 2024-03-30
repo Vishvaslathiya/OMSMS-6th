@@ -21,7 +21,7 @@ namespace OMSMS6.Res
             }
             else
             {
-                txtEmail.Text = Session["Email"].ToString();
+                txtEmail.Text = Session["UserEmail"].ToString();
             }
         }
 
@@ -67,7 +67,7 @@ namespace OMSMS6.Res
                     if (isUpdated > 0)
                     {
                         Session.RemoveAll();
-                        Session["Email"] = null;
+                        Session["UserEmail"] = null;
                         Response.Write("<script>alert('Password Changed Successfully!'); window.location='../Customer/Default.aspx'</script>");
                         //Response.Redirect("../Customer/Default.aspx");
                     }

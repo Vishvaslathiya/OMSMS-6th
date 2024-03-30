@@ -75,8 +75,8 @@ namespace OMSMS6.Res
                         }
                         else
                         {
-                            Session["Email"] = dr["email"].ToString();
-                            Session["name"] = dr["name"].ToString();
+                            Session["UserEmail"] = dr["email"].ToString();
+                            Session["UserName"] = dr["name"].ToString();
                             Session["uid"] = dr["id"];
                             conn.Close();
                             Response.Redirect("~/Customer/Default.aspx");

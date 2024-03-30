@@ -1,80 +1,77 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Edit_Profile.aspx.cs" Inherits="OMSMS6.Res.Edit_Profile" %>
+﻿<%@ Page Title="OMSMS | Edit Profile" MasterPageFile="~/Res/Customer_Navbar.Master" Language="C#" AutoEventWireup="true" CodeBehind="Edit_Profile.aspx.cs" Inherits="OMSMS6.Res.Edit_Profile" %>
 
 <%@ Register Src="~/Links.ascx" TagName="Links" TagPrefix="omsms" %>
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <omsms:Links runat="server" />
-    <title>OMSMS | Edit Profile</title>
 
     <%-- Validating Input --%>
     <script>
         $(document).ready(function () {
             $("#editProfileForm").validate({
                 rules: {
-                    txtName: {
+                    ctl00$ContentPlaceHolder1$txtName: {
                         required: true,
                         //text: true,
                     },
-                    txtEmail: {
+                    ctl00$ContentPlaceHolder1$txtEmail: {
                         required: true,
                         email: true,
                     },
-                    txtContact: {
+                    ctl00$ContentPlaceHolder1$txtContact: {
                         required: true,
                         number: true,
                         minlength: 10,
                         maxlength: 10,
                     },
-                    gender: {
+                    ctl00$ContentPlaceHolder1$gender: {
                         required: true,
                     },
-                    ddlState: {
+                    ctl00$ContentPlaceHolder1$ddlState: {
                         required: true,
                     },
-                    ddlCity: {
+                    ctl00$ContentPlaceHolder1$ddlCity: {
                         required: true,
                     },
-                    txtAddress: {
+                    ctl00$ContentPlaceHolder1$txtAddress: {
                         required: true,
                     },
 
                 },
                 messages: {
-                    txtName: {
+                    ctl00$ContentPlaceHolder1$txtName: {
                         required: "Please Enter Your Name!",
                         //text: "Please Enter Only Text!",
                     },
-                    txtEmail: {
+                    ctl00$ContentPlaceHolder1$txtEmail: {
                         required: "Please Enter Your Email!",
                         email: "Please Enter Valid Email!",
                     },
-                    txtContact: {
+                    ctl00$ContentPlaceHolder1$txtContact: {
                         required: "Please Enter Contact Number!",
                         number: "Please Enter Valid Contact Number!",
                         minlength: "Please Enter 10 Digit Contact Number!",
                         maxlength: "Please Enter 10 Digit Contact Number!",
                     },
-                    gender: {
+                    ctl00$ContentPlaceHolder1$gender: {
                         required: "Please Select Gender!",
                     },
-                    ddlState: {
+                    ctl00$ContentPlaceHolder1$ddlState: {
                         required: "Please Select State!",
                     },
-                    ddlCity: {
+                    ctl00$ContentPlaceHolder1$ddlCity: {
                         required: "Please Select City!",
                     },
-                    txtAddress: {
+                    ctl00$ContentPlaceHolder1$txtAddress: {
                         required: "Please Enter Full Address!",
                     },
                 },
             });
         });
     </script>
-
-</head>
-<body>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="py-16">
         <div class="flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
             <div class="w-full p-8 lg:w-1/2">
@@ -96,7 +93,7 @@
                     <%-- Email --%>
                     <div class="mt-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
-                        <asp:TextBox runat="server" ID="txtEmail" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none disabled" TextMode="Email" ReadOnly="true"/>
+                        <asp:TextBox runat="server" ID="txtEmail" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none disabled" TextMode="Email" ReadOnly="true" />
                     </div>
 
                     <%-- Contact Number --%>
@@ -122,7 +119,7 @@
                                 <label>Other</label>
                             </div>
                         </div>
-                        <label id="gender-error" class="error" for="gender"></label>
+                        <label id="ctl00$ContentPlaceHolder1$gender-error" class="error" for="ctl00$ContentPlaceHolder1$gender"></label>
                     </div>
 
                     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
@@ -130,29 +127,29 @@
                         <%-- State --%>
                         <div>
                             <asp:UpdatePanel runat="server" ID="statePanel">
-                                <ContentTemplate>
+                                <contenttemplate>
                                     <label class="block text-gray-700 text-sm font-bold mb-2">State</label>
                                     <asp:DropDownList runat="server" ID="ddlState" AutoPostBack="true" DataTextField="name" DataValueField="id" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" OnSelectedIndexChanged="ddlState_SelectedIndexChanged">
                                     </asp:DropDownList>
-                                </ContentTemplate>
-                                <Triggers>
+                                </contenttemplate>
+                                <triggers>
                                     <asp:AsyncPostBackTrigger ControlID="ddlState" />
-                                </Triggers>
+                                </triggers>
                             </asp:UpdatePanel>
                         </div>
 
                         <%-- City --%>
                         <div class="mt-4">
                             <asp:UpdatePanel ID="cityPanel" runat="server">
-                                <ContentTemplate>
+                                <contenttemplate>
                                     <label class="block text-gray-700 text-sm font-bold mb-2">City</label>
                                     <asp:DropDownList runat="server" ID="ddlCity" AutoPostBack="true" DataTextField="name" DataValueField="id" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none">
                                         <asp:ListItem>--Select State First--</asp:ListItem>
                                     </asp:DropDownList>
-                                </ContentTemplate>
-                                <Triggers>
+                                </contenttemplate>
+                                <triggers>
                                     <asp:AsyncPostBackTrigger ControlID="ddlCity" />
-                                </Triggers>
+                                </triggers>
                             </asp:UpdatePanel>
                         </div>
                     </div>
@@ -179,5 +176,4 @@
             window.location.href = "../Customer/Default.aspx";
         }
     </script>
-</body>
-</html>
+</asp:Content>

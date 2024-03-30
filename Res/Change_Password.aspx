@@ -1,11 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Change_Password.aspx.cs" Inherits="OMSMS6.Res.Change_Password" %>
+﻿<%@ Page Title="OMSMS | Change Password" MasterPageFile="~/Res/Customer_Navbar.Master" Language="C#" AutoEventWireup="true" CodeBehind="Change_Password.aspx.cs" Inherits="OMSMS6.Res.Change_Password" %>
 
 <%@ Register Src="~/Links.ascx" TagName="Links" TagPrefix="omsms" %>
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>OMSMS | Change Password</title>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <omsms:Links runat="server" />
 
     <%-- Validating Input --%>
@@ -13,46 +11,46 @@
         $(document).ready(function () {
             $('#changePasswordForm').validate({
                 rules: {
-                    txtEmail: {
+                    ctl00$ContentPlaceHolder1$txtEmail: {
                         required: true,
                         email: true
                     },
-                    txtOldPassword: {
+                    ctl00$ContentPlaceHolder1$txtOldPassword: {
                         required: true,
                         minlength: 6
                     },
-                    txtPassword: {
+                    ctl00$ContentPlaceHolder1$txtPassword: {
                         required: true,
                         minlength: 6
                     },
-                    txtRepeatPassword: {
+                    ctl00$ContentPlaceHolder1$txtRepeatPassword: {
                         required: true,
                         equalTo: "#txtPassword"
                     },
                 },
                 messages: {
-                    txtEmail: {
+                    ctl00$ContentPlaceHolder1$txtEmail: {
                         required: "Please Enter Email!",
                         email: "Please Enter a valid Email!"
                     },
-                    txtOldPassword: {
+                    ctl00$ContentPlaceHolder1$txtOldPassword: {
                         required: "Please Enter Old Password!",
                         minlength: "Password must be at least 6 characters long!"
                     },
-                    txtPassword: {
-                        required: "Please Enter Password!",
+                    ctl00$ContentPlaceHolder1$txtPassword: {
+                        required: "Please Enter New Password!",
                         minlength: "Password must be at least 6 characters long!"
                     },
-                    txtRepeatPassword: {
-                        required: "Please Enter Password Again!",
+                    ctl00$ContentPlaceHolder1$txtRepeatPassword: {
+                        required: "Please Enter New Password Again!",
                         equalTo: "Both Passwords are must be Same!"
                     },
                 },
             });
         });
     </script>
-</head>
-<body>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="py-16">
         <div class="flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
             <div class="hidden lg:block lg:w-1/2 bg-cover"
@@ -72,24 +70,24 @@
                     <%-- Email --%>
                     <div class="mt-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
-                        <asp:TextBox runat="server" ID="txtEmail" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" TextMode="Email" ReadOnly="true"/>
+                        <asp:TextBox runat="server" ID="txtEmail" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" TextMode="Email" ReadOnly="true" />
                     </div>
 
                     <%-- Old Password --%>
                     <div class="mt-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Old Password</label>
                         <asp:TextBox runat="server" ID="txtOldPassword" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" TextMode="Password" />
                     </div>
 
                     <%-- Password --%>
                     <div class="mt-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">New Password</label>
                         <asp:TextBox runat="server" ID="txtPassword" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" TextMode="Password" />
                     </div>
 
                     <%-- Repeat Password --%>
                     <div class="mt-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2">Repeat Password</label>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Repeat New Password</label>
                         <asp:TextBox runat="server" ID="txtRepeatPassword" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" TextMode="Password" />
                     </div>
 
@@ -106,5 +104,4 @@
             window.location.href = "../Customer/Default.aspx";
         }
     </script>
-</body>
-</html>
+</asp:Content>

@@ -65,6 +65,9 @@ namespace OMSMS6.Customer
                     Response.Write("<script>alert('Registration done Successfully!'); window.location='../Res/Login.aspx'</script>");
                     //ClientScript.RegisterStartupScript(this.GetType(), "Script", "alert('You have done Successfull Registration!')", true);
                     //Response.Redirect("~/Res/Login.aspx");
+                } else
+                {
+                    Response.Write("<script>alert('Something went Wrong!'); window.location='../Customer/Registration.aspx'</script>");
                 }
             }
             else

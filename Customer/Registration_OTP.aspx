@@ -41,7 +41,8 @@
                     <ion-icon onclick="onClickClose()" name="close" class="text-2xl cursor-pointer"></ion-icon>
                 </div>
                 <h2 class="text-2xl font-semibold text-gray-700 text-center">OMSMS</h2>
-                <p class="text-xl text-gray-600 text-center">OTP Verification</p>
+                <p class="text-xl text-gray-600 text-center">OTP sent on</p>
+                <p class="text-xl text-gray-600 text-center"><%=Session["email"] %></p>
 
                 <%-- Registration OTP Form --%>
                 <form id="registrationOTPForm" runat="server">

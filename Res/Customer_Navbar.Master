@@ -45,7 +45,7 @@
                     <ion-icon name="cart"></ion-icon>
                 </asp:HyperLink>
 
-                <%if (Session["Email"] == null)
+                <%if (Session["UserEmail"] == null)
                     {  %>
                 <div class="">
                     <button onclick="onClickLogin()" class=" bg-[#1F2833] text-white px-3 py-1 rounded-l-full hover:bg-[#C5C6C7] hover:text-[#1F2833]">Sign in</button>
@@ -65,8 +65,8 @@
                 <!-- Dropdown menu -->
                 <div id="userDropdown" class="z-10 hidden bg-white divide-y divide-gray-900 rounded-lg shadow w-54 ">
                     <div class="px-4 py-3 text-sm text-gray-900">
-                        <div><%= Session["name"].ToString() %></div>
-                        <div class="font-medium truncate"><%= Session["Email"].ToString() %></div>
+                        <div><%= Session["UserName"].ToString() %></div>
+                        <div class="font-medium truncate"><%= Session["UserEmail"].ToString() %></div>
                     </div>
                     <%--<form runat="server">--%>
                     <div>
