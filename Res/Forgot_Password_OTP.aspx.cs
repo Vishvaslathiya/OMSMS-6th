@@ -63,9 +63,10 @@ namespace OMSMS6.Res
                     Session["email"] = null;
                     Session["userPassword"] = null;
 
-                    ClientScript.RegisterStartupScript(this.GetType(), "ToastrScript", "toastr.success('Password Updated Successfully!')", true);
+                    //ClientScript.RegisterStartupScript(this.GetType(), "ToastrScript", "toastr.success('Password Updated Successfully!')", true);
+                    Response.Write("<script>alert('Password changed Successfully!'); window.location='../Res/Login.aspx'</script>");
                     conn.Close();
-                    Response.Redirect("Login.aspx");
+                    //Response.Redirect("Login.aspx");
                 }
                 else
                 {
