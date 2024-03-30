@@ -37,20 +37,24 @@ namespace OMSMS6.Res
 
                 if (SendMail(email, OTP))
                 {
-                    ClientScript.RegisterStartupScript(this.GetType(), "ToastrScript", "toastr.success('Password sent on your Email Address!')", true);
+                    //ClientScript.RegisterStartupScript(this.GetType(), "ToastrScript", "toastr.success('OTP sent on your Email Address!')", true);
                     dr.Close();
                     conn.Close();
                     Response.Redirect("Forgot_Password_OTP.aspx");
                 }
                 else
                 {
-                    ClientScript.RegisterStartupScript(this.GetType(), "ToastrScript", "toastr.error('Error in sending Email!')", true);
+
+                    Response.Write("<script>alert('Error in sending Email!');</script>");
+                    //ClientScript.RegisterStartupScript(this.GetType(), "ToastrScript", "toastr.error('Error in sending Email!')", true);
                 }
 
             }
             else
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "ToastrScript", "toastr.error('Email not Found!')", true);
+
+                Response.Write("<script>alert('Email not Found!');</script>");
+                //ClientScript.RegisterStartupScript(this.GetType(), "ToastrScript", "toastr.error('Email not Found!')", true);
             }
         }
 

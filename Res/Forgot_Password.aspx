@@ -22,7 +22,7 @@
                     },
                     ctl00$ContentPlaceHolder1$txtRepeatPassword: {
                         required: true,
-                        equalTo: "#txtPassword"
+                        equalTo: "#<%= txtPassword.ClientID %>"
                     },
                 },
                 messages: {

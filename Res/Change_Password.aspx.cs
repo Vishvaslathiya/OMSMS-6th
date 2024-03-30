@@ -90,7 +90,8 @@ namespace OMSMS6.Res
             {
                 dr.Close();
                 conn.Close();
-                Response.Write("<script>toastr.error('Email not Found! Please check it once!')</script>");
+                //Response.Write("<script>toastr.error('Email not Found! Please check it once!')</script>");
+                Response.Write("<script>alert('Email not Found! Please check it once!');</script>");
             }
 
         }

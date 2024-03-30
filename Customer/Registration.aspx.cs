@@ -139,7 +139,8 @@ namespace OMSMS6.Customer
                 }
             } else
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "ErrorScript", "toastr.error('The Email Address is already registered with Us.');", true);
+                //ClientScript.RegisterStartupScript(this.GetType(), "ErrorScript", "toastr.error('The Email Address is already registered with Us.');", true);
+                Response.Write("<script>alert('This Email is already registered with Us!');</script>");
                 dr.Close();
             }
         }

@@ -84,19 +84,22 @@ namespace OMSMS6.Res
                     }
                     else
                     {
-                        ClientScript.RegisterStartupScript(this.GetType(), "ErrorScript", "toastr.error('Invalid Password! Please Validate Password!')", true);
+                        //ClientScript.RegisterStartupScript(this.GetType(), "ErrorScript", "toastr.error('Invalid Password! Please Validate Password!')", true);
+                        Response.Write("<script>alert('Invalid Password! Please validate!');</script>");
                         dr.Close();
                     }
                 }
                 else
                 {
-                    ClientScript.RegisterStartupScript(this.GetType(), "ErrorScript", "toastr.error('Your Account is Blocked by Admin!')", true);
+                    //ClientScript.RegisterStartupScript(this.GetType(), "ErrorScript", "toastr.error('Your Account is Blocked by Admin!')", true);
+                    Response.Write("<script>alert('Your Account is blocked!');</script>");
                     dr.Close();
                 }
             }
             else
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "ErrorScript", "toastr.error('Email not Found! Please Varify Email OR Register First!')", true);
+                //ClientScript.RegisterStartupScript(this.GetType(), "ErrorScript", "toastr.error('Email not Found! Please Varify Email OR Register First!')", true);
+                Response.Write("<script>alert('Email not Found! Please verify Email OR Register First!');</script>");
                 dr.Close();
             }
         }

@@ -70,13 +70,15 @@ namespace OMSMS6.Res
                 }
                 else
                 {
-                    ClientScript.RegisterStartupScript(this.GetType(), "ToastrScript", "toastr.error('Error in Updating Password!')", true);
+                    //ClientScript.RegisterStartupScript(this.GetType(), "ToastrScript", "toastr.error('Error in Updating Password!')", true);
+                    Response.Write("<script>alert('Error in updating Password!');</script>");
                 }
             }
             else
             {
+                Response.Write("<script>alert('OTP not matched!');</script>");
                 //ClientScript.RegisterStartupScript(this.GetType(), "Script", "alert('Invalid OTP!')", true);
-                ClientScript.RegisterStartupScript(this.GetType(), "ToastrScript", "toastr.error('Invalid OTP!')", true);
+                //ClientScript.RegisterStartupScript(this.GetType(), "ToastrScript", "toastr.error('Invalid OTP!')", true);
             }
             conn.Close();
         }
