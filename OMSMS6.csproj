@@ -72,6 +72,7 @@
     <Content Include="Admin\Delete_User.aspx" />
     <Content Include="Admin\Edit_Profile.aspx" />
     <Content Include="Admin\Manage_User.aspx" />
+    <Content Include="Admin\Other.aspx" />
     <Content Include="Admin\Users.aspx" />
     <Content Include="Admin\Res\Css\Admin_Css.css" />
     <Content Include="Admin\Res\Js\main.js" />
@@ -152,6 +153,13 @@
     </Compile>
     <Compile Include="Admin\Manage_User.aspx.designer.cs">
       <DependentUpon>Manage_User.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Other.aspx.cs">
+      <DependentUpon>Other.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Other.aspx.designer.cs">
+      <DependentUpon>Other.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Users.aspx.cs">
       <DependentUpon>Users.aspx</DependentUpon>

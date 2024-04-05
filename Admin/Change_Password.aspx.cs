@@ -29,13 +29,13 @@ namespace OMSMS6.Admin
         {
             conn.Close();
             conn.Open();
-            SqlCommand selectUser = new SqlCommand("SELECT * FROM tblUsers WHERE id = @uid", conn);
-            selectUser.Parameters.AddWithValue("@uid", Session["aid"]);
+            SqlCommand selectUser = new SqlCommand("SELECT * FROM tblUsers WHERE id = @aid", conn);
+            selectUser.Parameters.AddWithValue("@aid", Session["aid"]);
             SqlDataReader dr = selectUser.ExecuteReader();
             if (dr.Read())
             {
 
-                SqlCommand updatePassword = new SqlCommand("UPDATE tblUsers SET password = @password WHERE id = @uid", conn);
+                SqlCommand updatePassword = new SqlCommand("UPDATE tblUsers SET password = @password WHERE id = @aid", conn);
 
                 SHA256 sha256 = SHA256.Create();
                 byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(txtOldPassword.Text.ToString()));
@@ -61,13 +61,14 @@ namespace OMSMS6.Admin
                     }
 
                     updatePassword.Parameters.AddWithValue("@password", sb1.ToString());
-                    updatePassword.Parameters.AddWithValue("@uid", Session["uid"]);
+                    updatePassword.Parameters.AddWithValue("@aid", Session["aid"]);
                     int isUpdated = updatePassword.ExecuteNonQuery();
                     conn.Close();
                     if (isUpdated > 0)
                     {
                         Session.RemoveAll();
-                        Session["Email"] = null;
+                        Session["AdminEmail"] = null;
+                        Session["AdminName"] = null;
                         Response.Write("<script>alert('Password Changed Successfully!'); window.location='../Customer/Default.aspx'</script>");
                         //Response.Redirect("../Customer/Default.aspx");
                     }
@@ -75,7 +76,8 @@ namespace OMSMS6.Admin
                     {
                         dr.Close();
                         conn.Close();
-                        Response.Write("<script>toastr.error('Error in Changing Password!')</script>");
+                        Response.Write("<script>alert('Error in Changing Password!'); </script>");
+                        //Response.Write("<script>toastr.error('Error in Changing Password!')</script>");
                     }
                     //Response.Redirect("../Customer/Default.aspx");
                 }
@@ -89,9 +91,9 @@ namespace OMSMS6.Admin
             {
                 dr.Close();
                 conn.Close();
-                Response.Write("<script>toastr.error('Email not Found! Please check it once!')</script>");
+                //Response.Write("<script>toastr.error('Email not Found! Please check it once!')</script>");
+                Response.Write("<script>alert('Email not Found! Please check it once!');</script>");
             }
-
         }
     }
 }

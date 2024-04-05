@@ -1,71 +1,80 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Edit_Profile.aspx.cs" Inherits="OMSMS6.Admin.Edit_Profile" %>
+﻿<%@ Page Title="OMSMS | Edit Profile" Language="C#" MasterPageFile="~/Admin/Admin.Master" AutoEventWireup="true" CodeBehind="Edit_Profile.aspx.cs" Inherits="OMSMS6.Admin.Edit_Profile" %>
 
 <%@ Register Src="~/Links.ascx" TagName="Links" TagPrefix="omsms" %>
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <omsms:Links runat="server" />
-    <title>OMSMS | Edit Profile</title>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <%-- Tailwind CSS CDN --%>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../Admin/Res/Css/Admin_Css.css">
+
+    <%-- JQuery CDNs --%>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+
+    <%-- Error Color --%>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
 
     <%-- Validating Input --%>
     <script>
         $(document).ready(function () {
             $("#editProfileForm").validate({
                 rules: {
-                    txtName: {
+                    ctl00$ContentPlaceHolder1$txtName: {
                         required: true,
                         //text: true,
                     },
-                    txtEmail: {
+                    ctl00$ContentPlaceHolder1$txtEmail: {
                         required: true,
                         email: true,
                     },
-                    txtContact: {
+                    ctl00$ContentPlaceHolder1$txtContact: {
                         required: true,
                         number: true,
                         minlength: 10,
                         maxlength: 10,
                     },
-                    gender: {
+                    ctl00$ContentPlaceHolder1$gender: {
                         required: true,
                     },
-                    ddlState: {
+                    ctl00$ContentPlaceHolder1$ddlState: {
                         required: true,
                     },
-                    ddlCity: {
+                    ctl00$ContentPlaceHolder1$ddlCity: {
                         required: true,
                     },
-                    txtAddress: {
+                    ctl00$ContentPlaceHolder1$txtAddress: {
                         required: true,
                     },
-
                 },
                 messages: {
-                    txtName: {
+                    ctl00$ContentPlaceHolder1$txtName: {
                         required: "Please Enter Your Name!",
                         //text: "Please Enter Only Text!",
                     },
-                    txtEmail: {
+                    ctl00$ContentPlaceHolder1$txtEmail: {
                         required: "Please Enter Your Email!",
                         email: "Please Enter Valid Email!",
                     },
-                    txtContact: {
+                    ctl00$ContentPlaceHolder1$txtContact: {
                         required: "Please Enter Contact Number!",
                         number: "Please Enter Valid Contact Number!",
                         minlength: "Please Enter 10 Digit Contact Number!",
                         maxlength: "Please Enter 10 Digit Contact Number!",
                     },
-                    gender: {
+                    ctl00$ContentPlaceHolder1$gender: {
                         required: "Please Select Gender!",
                     },
-                    ddlState: {
+                    ctl00$ContentPlaceHolder1$ddlState: {
                         required: "Please Select State!",
                     },
-                    ddlCity: {
+                    ctl00$ContentPlaceHolder1$ddlCity: {
                         required: "Please Select City!",
                     },
-                    txtAddress: {
+                    ctl00$ContentPlaceHolder1$txtAddress: {
                         required: "Please Enter Full Address!",
                     },
                 },
@@ -73,8 +82,8 @@
         });
     </script>
 
-</head>
-<body>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="py-16">
         <div class="flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
             <div class="w-full p-8 lg:w-1/2">
@@ -86,7 +95,7 @@
                 <p class="text-xl text-gray-600 text-center">Update Your Profile from here!</p>
 
                 <%-- Registration Form --%>
-                <form id="editProfileForm" runat="server">
+                <form class="relative" id="editProfileForm" runat="server">
                     <%-- Name --%>
                     <div class="mt-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Full Name</label>
@@ -96,7 +105,7 @@
                     <%-- Email --%>
                     <div class="mt-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
-                        <asp:TextBox runat="server" ID="txtEmail" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none disabled" TextMode="Email" ReadOnly="true"/>
+                        <asp:TextBox runat="server" ID="txtEmail" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none disabled" TextMode="Email" ReadOnly="true" />
                     </div>
 
                     <%-- Contact Number --%>
@@ -179,5 +188,4 @@
             window.location.href = "../Admin/Default.aspx";
         }
     </script>
-</body>
-</html>
+</asp:Content>

@@ -39,7 +39,7 @@
                         minlength: 10,
                         maxlength: 10,
                     },
-                    ctl00$ContentPlaceHolder1$gener: {
+                    ctl00$ContentPlaceHolder1$gender: {
                         required: true,
                     },
                     ctl00$ContentPlaceHolder1$ddlState: {
@@ -51,35 +51,34 @@
                     ctl00$ContentPlaceHolder1$txtAddress: {
                         required: true,
                     },
-
                 },
-                messages:
+                messages: {
                     ctl00$ContentPlaceHolder1$txtName: {
-                required: "Please Enter Your Name!",
-                //text: "Please Enter Only Text!",
-            },
-                ctl00$ContentPlaceHolder1$txtEmail: {
-                required: "Please Enter Your Email!",
-                email: "Please Enter Valid Email!",
-            },
-                ctl00$ContentPlaceHolder1$txtContact: {
-                required: "Please Enter Contact Number!",
-                number: "Please Enter Valid Contact Number!",
-                minlength: "Please Enter 10 Digit Contact Number!",
-                maxlength: "Please Enter 10 Digit Contact Number!",
-            },
-                ctl00$ContentPlaceHolder1$gener: {
-                required: "Please Select Gender!",
-            },
-                ctl00$ContentPlaceHolder1$ddlState: {
-                required: "Please Select State!",
-            },
-                ctl00$ContentPlaceHolder1$ddlCity: {
-                required: "Please Select City!",
-            },
-                ctl00$ContentPlaceHolder1$txtAddress: {
-                required: "Please Enter Full Address!",
-            },
+                        required: "Please Enter Your Name!",
+                        //text: "Please Enter Only Text!",
+                    },
+                    ctl00$ContentPlaceHolder1$txtEmail: {
+                        required: "Please Enter Your Email!",
+                        email: "Please Enter Valid Email!",
+                    },
+                    ctl00$ContentPlaceHolder1$txtContact: {
+                        required: "Please Enter Contact Number!",
+                        number: "Please Enter Valid Contact Number!",
+                        minlength: "Please Enter 10 Digit Contact Number!",
+                        maxlength: "Please Enter 10 Digit Contact Number!",
+                    },
+                    ctl00$ContentPlaceHolder1$gender: {
+                        required: "Please Select Gender!",
+                    },
+                    ctl00$ContentPlaceHolder1$ddlState: {
+                        required: "Please Select State!",
+                    },
+                    ctl00$ContentPlaceHolder1$ddlCity: {
+                        required: "Please Select City!",
+                    },
+                    ctl00$ContentPlaceHolder1$txtAddress: {
+                        required: "Please Enter Full Address!",
+                    },
                 },
             });
         });

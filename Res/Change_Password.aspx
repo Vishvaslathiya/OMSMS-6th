@@ -79,13 +79,13 @@
                         <asp:TextBox runat="server" ID="txtOldPassword" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" TextMode="Password" />
                     </div>
 
-                    <%-- Password --%>
+                    <%-- New Password --%>
                     <div class="mt-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2">New Password</label>
                         <asp:TextBox runat="server" ID="txtPassword" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" TextMode="Password" />
                     </div>
 
-                    <%-- Repeat Password --%>
+                    <%-- Repeat New Password --%>
                     <div class="mt-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Repeat New Password</label>
                         <asp:TextBox runat="server" ID="txtRepeatPassword" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" TextMode="Password" />

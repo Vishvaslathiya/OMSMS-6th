@@ -4,17 +4,18 @@
     <%-- Tailwind CSS CDN --%>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../Admin/Res/Css/Admin_Css.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="pl-[16%] pt-20 space-y-10">
+    <div class=" pl-[16%] pt-20 space-y-10">
         <div class="relative w-fit">
             <a href="Add_Users.aspx" class="bg-gray-700 hover:bg-gray-900 hover:cursor-pointer text-white font-bold py-2 px-4 rounded">+ Add User</a>
         </div>
         <%-- Table to display Admins --%>
-        <div>
+        <div class="relative">
             <h4 class="text-2xl bg-gray-700 w-fit text-white p-2 rounded-r-xl mb-5">Admins</h4>
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg mr-2">
-                <table id="tblAdmin" class="w-[100%] text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
+            <div class="overflow-x-auto shadow-md sm:rounded-lg mr-2">
+                <table id="tblAdmin" class="w-[100%] text-sm text-center rtl:text-right text-black">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-6 py-3">Sr. No</th>
@@ -29,9 +30,9 @@
                     <tbody>
                         <asp:Repeater ID="rptAdmins" runat="server">
                             <ItemTemplate>
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <tr class="hover:bg-gray-300">
                                     <td class="px-6 py-4"><%# Container.ItemIndex + 1 %></td>
-                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"><%# Eval("name") %></td>
+                                    <td scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-black"><%# Eval("name") %></td>
                                     <td class="px-6 py-4"><%# Eval("email") %></td>
                                     <td class="px-6 py-4"><%# Eval("contact") %></td>
                                     <%--<td class="px-6 py-4"><%# Eval("City") %></td>--%>
@@ -52,7 +53,7 @@
         <div>
             <h4 class="text-2xl bg-gray-700 w-fit text-white p-2 rounded-r-xl mb-5">Customers</h4>
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg mr-2">
-                <table id="tblCustomers" class="w-[100%] text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
+                <table id="tblCustomers" class="w-[100%] text-sm text-center rtl:text-right text-black">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-6 py-3">Sr. No</th>
@@ -67,9 +68,9 @@
                     <tbody>
                         <asp:Repeater ID="rptCustomers" runat="server">
                             <ItemTemplate>
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <tr class="hover:bg-gray-300">
                                     <td class="px-6 py-4"><%# Container.ItemIndex + 1 %></td>
-                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"><%# Eval("name") %></td>
+                                    <td scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-black"><%# Eval("name") %></td>
                                     <td class="px-6 py-4"><%# Eval("email") %></td>
                                     <td class="px-6 py-4"><%# Eval("contact") %></td>
                                     <%--<td class="px-6 py-4"><%# Eval("City") %></td>--%>
@@ -86,4 +87,50 @@
             </div>
         </div>
     </div>
+
+    <%-- Pagination --%>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+    <script>
+
+        // Admin Table
+        var dataTable = $('#tblAdmin').DataTable({
+            "pagingType": "full_numbers",
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            language: {
+                searchPlaceholder: "Search Admins",
+            },
+            "ordering": true,
+            "info": true,
+            responsive: true,
+            "autoWidth": false,
+            "lengthMenu": [
+                [5, 25, 50, -1],
+                [5, 25, 50, "All"]
+            ],
+        });
+
+
+        // Customer Table
+        var dataTable = $('#tblCustomers').DataTable({
+            "pagingType": "full_numbers",
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            language: {
+                searchPlaceholder: "Search Customers",
+            },
+            "ordering": true,
+            "info": true,
+            responsive: true,
+            "autoWidth": false,
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+        });
+    </script>
 </asp:Content>
