@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -96,7 +96,7 @@ namespace OMSMS6.Customer
                 gender = "Other";
             }
             String city = ddlCity.SelectedValue;
-            String address = txtAddress.Text;
+            //String address = txtAddress.Text;
 
             //String alert = "alert('" + name + ", " + email + ", " + contact + ", " + password + ", " + gender + ", " + city + ", " + address +"');";
             //ClientScript.RegisterStartupScript(this.GetType(), "alert", alert, true);
@@ -128,7 +128,7 @@ namespace OMSMS6.Customer
                 Session["password"] = hashedPassword;
                 Session["gender"] = gender;
                 Session["city"] = city;
-                Session["address"] = address;
+                //Session["address"] = address;
                 Session["OTP"] = OTP;
 
                 bool isSent = SendMail(email, OTP);
@@ -139,7 +139,8 @@ namespace OMSMS6.Customer
                 }
             } else
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "ErrorScript", "toastr.error('The Email Address is already registered with Us.');", true);
+                //ClientScript.RegisterStartupScript(this.GetType(), "ErrorScript", "toastr.error('The Email Address is already registered with Us.');", true);
+                Response.Write("<script>alert('This Email is already registered with Us!');</script>");
                 dr.Close();
             }
         }
