@@ -1,12 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Registration.aspx.cs" Inherits="OMSMS6.Customer.Registration" %>
+<%@ Page Title="OMSMS | Registration" Language="C#" MasterPageFile="~/Res/Customer_Navbar.Master" AutoEventWireup="true" CodeBehind="Registration.aspx.cs" Inherits="OMSMS6.Customer.Registration" %>
 
 <%@ Register Src="~/Links.ascx" TagName="Links" TagPrefix="omsms" %>
 
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>OMSMS | Registration</title>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
     <omsms:Links runat="server" />
 
@@ -14,7 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <%-- Toastr Options --%>
     <script>
         toastr.options = {
             "positionClass": "toast-top-center",
@@ -28,7 +25,7 @@
         };
     </script>
 
-   <%-- <script>
+    <%-- <script>
         // Function to display Toastr success message
         function showSuccessMessage(message) {
             toastr.success(message);
@@ -45,87 +42,85 @@
         $(document).ready(function () {
             $("#RegistrationForm").validate({
                 rules: {
-                    txtName: {
+                    ctl00$ContentPlaceHolder1$txtName: {
                         required: true,
                         //text: true,
                     },
-                    txtEmail: {
+                    ctl00$ContentPlaceHolder1$txtEmail: {
                         required: true,
                         email: true,
                     },
-                    txtContact: {
+                    ctl00$ContentPlaceHolder1$txtContact: {
                         required: true,
                         number: true,
                         minlength: 10,
                         maxlength: 10,
                     },
-                    txtPassword: {
+                    ctl00$ContentPlaceHolder1$txtPassword: {
                         required: true,
                         minlength: 6,
                     },
-                    txtRepeatPassword: {
+                    ctl00$ContentPlaceHolder1$txtRepeatPassword: {
                         required: true,
-                        equalTo: '#txtPassword',
+                        equalTo: "#<%= txtPassword.ClientID%>",
                     },
-                    gener: {
-                        required: true,
-                    },
-                    ddlState: {
+                    ctl00$ContentPlaceHolder1$gender: {
                         required: true,
                     },
-                    ddlCity: {
+                    ctl00$ContentPlaceHolder1$ddlState: {
                         required: true,
                     },
-                    txtAddress: {
+                    ctl00$ContentPlaceHolder1$ddlCity: {
                         required: true,
                     },
+                    //ctl00$ContentPlaceHolder1$txtAddress: {
+                    //    required: true,
+                    //},
 
                 },
                 messages: {
-                    txtName: {
+                    ctl00$ContentPlaceHolder1$txtName: {
                         required: "Please Enter Your Name!",
                         //text: "Please Enter Only Text!",
                     },
-                    txtEmail: {
+                    ctl00$ContentPlaceHolder1$txtEmail: {
                         required: "Please Enter Your Email!",
                         email: "Please Enter Valid Email!",
                     },
-                    txtContact: {
+                    ctl00$ContentPlaceHolder1$txtContact: {
                         required: "Please Enter Contact Number!",
                         number: "Please Enter Valid Contact Number!",
                         minlength: "Please Enter 10 Digit Contact Number!",
                         maxlength: "Please Enter 10 Digit Contact Number!",
                     },
-                    txtPassword: {
+                    ctl00$ContentPlaceHolder1$txtPassword: {
                         required: "Please Enter Password!",
                         minlength: "Password must be at least 6 character long!",
                     },
-                    txtRepeatPassword: {
+                    ctl00$ContentPlaceHolder1$txtRepeatPassword: {
                         required: "Please Enter Password Again!",
                         equalTo: 'Both password should be Same!',
                     },
-                    gener: {
+                    ctl00$ContentPlaceHolder1$gender: {
                         required: "Please Select Gender!",
                     },
-                    ddlState: {
+                    ctl00$ContentPlaceHolder1$ddlState: {
                         required: "Please Select State!",
                     },
-                    ddlCity: {
+                    ctl00$ContentPlaceHolder1$ddlCity: {
                         required: "Please Select City!",
                     },
-                    txtAddress: {
-                        required: "Please Enter Full Address!",
-                    },
+                    //ctl00$ContentPlaceHolder1$txtAddress: {
+                    //    required: "Please Enter Full Address!",
+                    //},
                 },
             });
-
-
         });
     </script>
+</asp:Content>
 
 
-</head>
-<body>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="py-16">
         <div class="flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
             <div class="w-full p-8 lg:w-1/2">
@@ -173,19 +168,19 @@
                         <label class="block text-gray-700 text-sm font-bold mb-2">Gender</label>
                         <div class="flex bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none space-x-5">
                             <div>
-                                <asp:RadioButton runat="server" ID="rbMale" GroupName="gener" class="text-lg" />
+                                <asp:RadioButton runat="server" ID="rbMale" GroupName="gender" class="text-lg" />
                                 <label>Male</label>
                             </div>
                             <div>
-                                <asp:RadioButton runat="server" ID="rbFemale" GroupName="gener" class="text-lg" />
+                                <asp:RadioButton runat="server" ID="rbFemale" GroupName="gender" class="text-lg" />
                                 <label>Female</label>
                             </div>
                             <div>
-                                <asp:RadioButton runat="server" ID="rbOther" GroupName="gener" class="text-lg" />
+                                <asp:RadioButton runat="server" ID="rbOther" GroupName="gender" class="text-lg" />
                                 <label>Other</label>
                             </div>
                         </div>
-                        <label id="gener-error" class="error" for="gener"></label>
+                        <label id="ctl00$ContentPlaceHolder1$gender-error" class="error" for="ctl00$ContentPlaceHolder1$gender"></label>
                     </div>
 
                     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
@@ -221,10 +216,10 @@
                     </div>
 
                     <%-- Address --%>
-                    <div class="mt-4">
+                    <%--<div class="mt-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Address</label>
                         <asp:TextBox runat="server" ID="txtAddress" TextMode="MultiLine" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" />
-                    </div>
+                    </div>--%>
 
                     <%-- Register Button --%>
                     <div class="mt-4">
@@ -249,5 +244,4 @@
             window.location.href = "Default.aspx";
         }
     </script>
-</body>
-</html>
+</asp:Content>
