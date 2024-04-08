@@ -1,35 +1,16 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Registration_OTP.aspx.cs" Inherits="OMSMS6.Customer.Registration_OTP" %>
+<%@ Page Title="OMSMS | Registration OTP" MasterPageFile="~/Res/Customer_Navbar.Master" Language="C#" AutoEventWireup="true" CodeBehind="Registration_OTP.aspx.cs" Inherits="OMSMS6.Customer.Registration_OTP" %>
 
 <%@ Register Src="~/Links.ascx" TagName="Links" TagPrefix="omsms" %>
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>OMSMS | OTP Verification</title>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <omsms:Links runat="server" />
 
-    <!-- toastr -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <%-- Toastr Options --%>
+    <%-- Validating Input --%>
     <script>
-        toastr.options = {
-            "positionClass": "toast-top-center",
-            "timeOut": 2000, // 2 seconds
-            "extendedTimeOut": 1000, // 1 second extended time on hover
-            "closeButton": true,
-            "progressBar": true,
-            "debug": false,
-            "showDuration": 300,
-            "hideDuration": 1000,
-        };
-
-
         $(document).ready(function () {
             $("#registrationOTPForm").validate({
                 rules: {
-                    txtOTP: {
+                    ctl00$ContentPlaceHolder1$txtOTP: {
                         required: true,
                         number: true,
                         maxlength: 6,
@@ -37,19 +18,18 @@
                     },
                 },
                 messages: {
-                    txtOTP: {
+                    ctl00$ContentPlaceHolder1$txtOTP: {
                         required: "Please Enter OTP!",
                         number: "Please Enter Valid OTP!",
-                        maxlength: "Please Enter 6 Digits of OTP!",
-                        minlength: "Please Enter 6 Digits of OTP!",
+                        maxlength: "OTP must br 6 Digits long!",
+                        minlength: "OTP must br 6 Digits long!",
                     },
                 },
             });
         });
     </script>
-
-</head>
-<body>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="py-16">
         <div class="flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
             <div class="hidden lg:block lg:w-1/2 bg-cover"
@@ -61,7 +41,8 @@
                     <ion-icon onclick="onClickClose()" name="close" class="text-2xl cursor-pointer"></ion-icon>
                 </div>
                 <h2 class="text-2xl font-semibold text-gray-700 text-center">OMSMS</h2>
-                <p class="text-xl text-gray-600 text-center">OTP Verification</p>
+                <p class="text-xl text-gray-600 text-center">OTP sent on</p>
+                <p class="text-xl text-gray-600 text-center"><%=Session["email"] %></p>
 
                 <%-- Registration OTP Form --%>
                 <form id="registrationOTPForm" runat="server">
@@ -90,5 +71,4 @@
             window.location.href = "../Customer/Default.aspx";
         }
     </script>
-</body>
-</html>
+</asp:Content>
