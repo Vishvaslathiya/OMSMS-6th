@@ -1,307 +1,596 @@
-<%@ Page Title="OMSMS | Checkout" Language="C#" Async="true"  MasterPageFile="~/Res/Customer_Navbar.Master" AutoEventWireup="true" CodeBehind="Customer_Checkout.aspx.cs" Inherits="OMSMS6.Customer.Customer_Checkout" %>
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using OMSMS6.Admin;
+using Org.BouncyCastle.Asn1.Ocsp;
+using Razorpay.Api;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Linq;
+using System.Net.Http;
+using System.Security.Cryptography;
+using System.Text;
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+using System.Threading.Tasks;
+
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using HttpMethod = System.Net.Http.HttpMethod;
+using System.Diagnostics.Eventing.Reader;
+using System.Net.NetworkInformation;
+
+namespace OMSMS6.Customer
+{
+    public partial class Customer_Checkout : System.Web.UI.Page
+    {
+
+        // SqlConnection con = new SqlConnection("Data Source=Vishvas;Initial Catalog=OMSMS;Integrated Security=True;");
+        //// SqlConnection con = new SqlConnection("Data Source=LAPTOP-SHON9L4N\\SQLEXPRESS;Initial Catalog=omsms;Integrated Security=True;");
+
+        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString);
+
+        String ship_token = "d7bf338ca22e659fc4e56d436b13226eacce0190";
+
+        String total;
+        int prodid;
+        private int j;
+        private const string _key = "rzp_test_Qit3KulorLte0H";
+        private const string _secret = "UpV5ntauZ58ccScdVF5XXN4s";
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                if (Session["uid"] == null)
+                {
+                    Response.Write("<script>alert('Please Login First'); window.location='../Customer/Default.aspx'</script>");
+                    Response.Redirect("Default.aspx");
 
 
-    <title>OMSMS</title>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <%-- Tailwind CSS CDN --%>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <%-- Daisy UI CDN --%>
-
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet"
-        type="text/css" />
-
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <%-- Ionicons Links --%>
-
-    <script type="module"
-        src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule="" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-
-
-    <%-- Favicon --%>
-    <link rel="icon" href="Images/logo.png" type="image/png">
-
-    <%-- CSS files --%>
-    <link rel="stylesheet" href="../Res/CSS/Style.css">
-
-    <%-- JQuery files --%>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-
-            $('#form1').validate({
-                rules: {
-                    ctl00$ContentPlaceHolder1$txtfname: {
-                        required: true
-
-                    },
-                    ctl00$ContentPlaceHolder1$txtlname: {
-                        required: true
-
-                    },
-                    ctl00$ContentPlaceHolder1$txtemail: {
-                        required: true,
-                        email: true
-
-                    },
-                    ctl00$ContentPlaceHolder1$txtcontact: {
-                        required: true,
-                        minlength: true
-
-                    },
-                    ctl00$ContentPlaceHolder1$payment: {
-                        required: true
-                    },
-                    ctl00$ContentPlaceHolder1$txtaddress: {
-                        required: true,
-                        minlength: 5
-                    }
-                },
-                messages: {
-                    ctl00$ContentPlaceHolder1$txtfname: {
-                        required: "Please Enter Your First Name"
-
-                    },
-                    ctl00$ContentPlaceHolder1$txtlname: {
-                        required: "Please Enter Your Last Name"
-
-                    },
-                    ctl00$ContentPlaceHolder1$txtemail: {
-                        required: "Please Enter Your Email",
-                        email: "Please enter a valid email address"
-                    },
-                    ctl00$ContentPlaceHolder1$txtcontact: {
-                        required: "Please Enter Your Contact Number",
-                        minlength: "Your Contact must be 10 Digits "
-
-                    },
-                    ctl00$ContentPlaceHolder1$payment: "Please select a Payment Method",
-                    ctl00$ContentPlaceHolder1$txtaddress: {
-                        required: "Please Provide a Delivery Address",
-                        minlength: "Your Address Should be Full Details!!"
-                    }
                 }
-            });
-        });
-    </script>
-
-</asp:Content>
-
-<%@ Import Namespace="System.Data" %>
-<%@ Import Namespace="System.Web.UI.WebControls" %>
-<%@ Import Namespace="System.Linq" %>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <form runat="server">
-        <section>
-            <div class="font-[sans-serif] bg-gray-50 h-full">
-                <div class="grid lg:grid-cols-2 xl:grid-cols-3 gap-4 h-full">
+                else
+                {
+                    LoadCart();
+                }
+            }
+            /*  bindCityState();*/
 
 
-                    <div class="container mx-auto">
-                        <div class="bg-gray-700 lg:h-screen lg:sticky lg:top-0">
-                            <div class="relative h-full">
-                                <div class="p-8 lg:overflow-auto lg:h-[calc(100vh-60px)]">
-                                    <h2 class="text-2xl font-bold text-white">Order Summary</h2>
-                                    <div class="space-y-6 mt-10">
-                                        <asp:Repeater ID="viewcartlist" runat="server">
-                                            <ItemTemplate>
-                                                <div class="grid sm:grid-cols-2 items-start gap-6">
-                                                    <div class="px-4 py-6 shrink-0 bg-gray-50 rounded-md">
-                                                        <img src='<%# "../Res/Images/" + Eval("ImageName") %>' class="w-full object-contain" />
-                                                        
-                                                    </div>
-                                                    <div>
-                                                        <h3 class="text-base text-white"><%# Eval("ProductName") %></h3>
-                                                        <ul class="text-xs text-white space-y-3 mt-4">
-                                                            <li class="flex flex-wrap gap-4">Size <span class="ml-auto">37</span></li>
-                                                            <li class="flex flex-wrap gap-4">Quantity <span class="ml-auto"><%# Eval("Quantity") %></span></li>
-                                                            <li class="flex flex-wrap gap-4">Total Price <span class="ml-auto"><%# Convert.ToDouble(Eval("Price")) * Convert.ToInt32(Eval("Quantity")) %>.00</span></li>
-                                                            <li class="flex flex-wrap gap-4">Product ID <span id="lblpid12" class="ml-auto"><%# Eval("ProductID").ToString()  %></span> </li> 
-                                                            <%-- Display Product id for each product --%>
-                                                            <asp:Label runat='server' ID="lblpid" Text='<%# Eval("ProductID").ToString()  %>' Visible="true" ></asp:Label>
-                                                            <label class="ml-auto text-2xl text-white" Visible="true" ID="lblpid1" Text='<%# Eval("ProductID").ToString()  %>' ></label>
-                                                        </ul>
-                                                        <%--<label class="ml-auto" runat="server" Visible="true" ID="lblpid" Text="<%# Eval("ProductID").ToString()  %>" ></label>--%>
-                                                    </div>
-                                                </div>
-                                            </ItemTemplate>
-                                        </asp:Repeater>
-                                    </div>
-                                </div>
-                                <div class="absolute left-0 bottom-0 bg-gray-700 w-full p-4">
-                                    <h4 class="flex flex-wrap gap-4 text-base text-white">Total
-                                        <span class="ml-auto">
-                                        <!-- icon for Rupee sign -->
-                                        <span> <i class="fas fa-rupee-sign"></i></span>
-                                        <asp:Label runat="server" ID="lbltotal" /><span class =" text-base text-white">.00</span> </span>
-
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        }
 
 
+        protected void LoadCart()
+        {
 
-                    <div class="xl:col-span-2 h-max rounded-md p-8 sticky top-0">
-                        <h2 class="text-2xl font-bold text-[#333]">Complete your order</h2>
-                        <div class="mt-10">
-                            <div>
-                                <h3 class="text-lg font-bold text-[#333] mb-6">Personal Details</h3>
-                                <div class="grid sm:grid-cols-2 gap-6">
-                                    <div class="relative flex items-center">
-                                        <asp:TextBox placeholder="First Name" ID="txtfname" runat="server" class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none"></asp:TextBox>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-4"
-                                            viewBox="0 0 24 24">
-                                            <circle cx="10" cy="7" r="6" data-original="#000000"></circle>
-                                            <path
-                                                d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
-                                                data-original="#000000">
-                                            </path>
-                                        </svg>
-                                    </div>
-                                    <div class="relative flex items-center">
-                                        <asp:TextBox placeholder="Last Name" ID="txtlname" runat="server" class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none"></asp:TextBox>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-4"
-                                            viewBox="0 0 24 24">
-                                            <circle cx="10" cy="7" r="6" data-original="#000000"></circle>
-                                            <path
-                                                d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
-                                                data-original="#000000">
-                                            </path>
-                                        </svg>
-                                    </div>
-                                    <div class="relative flex items-center">
-                                        <asp:TextBox placeholder="Email" ID="txtemail" runat="server" class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none"></asp:TextBox>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-4"
-                                            viewBox="0 0 682.667 682.667">
-                                            <defs>
-                                                <clipPath id="a" clipPathUnits="userSpaceOnUse">
-                                                    <path d="M0 512h512V0H0Z" data-original="#000000"></path>
-                                                </clipPath>
-                                            </defs>
-                                            <g clip-path="url(#a)" transform="matrix(1.33 0 0 -1.33 0 682.667)">
-                                                <path fill="none" stroke-miterlimit="10" stroke-width="40"
-                                                    d="M452 444H60c-22.091 0-40-17.909-40-40v-39.446l212.127-157.782c14.17-10.54 33.576-10.54 47.746 0L492 364.554V404c0 22.091-17.909 40-40 40Z"
-                                                    data-original="#000000">
-                                                </path>
-                                                <path
-                                                    d="M472 274.9V107.999c0-11.027-8.972-20-20-20H60c-11.028 0-20 8.973-20 20V274.9L0 304.652V107.999c0-33.084 26.916-60 60-60h392c33.084 0 60 26.916 60 60v196.653Z"
-                                                    data-original="#000000">
-                                                </path>
-                                            </g>
-                                        </svg>
-                                    </div>
-                                    <div class="relative flex items-center">
-                                        <asp:TextBox placeholder="Contact Number" ID="txtcono" runat="server" class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none"></asp:TextBox>
+            con.Open();
+            int uid = (int)Session["uid"];
+
+            //string uid = "7"; // Assuming the user ID is always "1"
+            SqlCommand cmd = new SqlCommand("SELECT CP.Id, P.Name AS ProductName,P.id AS ProductID, P.ImageName, PD.price, CP.Quantity , PD.id as prod_id FROM tblCartProduct CP  JOIN tblProductDetail PD ON CP.pid = PD.id JOIN tblProduct P ON PD.Pid = P.Id WHERE CP.Custid = @uid", con);
+
+            cmd.Parameters.AddWithValue("@uid", uid);
+            SqlDataReader reader = cmd.ExecuteReader();
+            //prodid = reader.GetInt32(reader.GetOrdinal("ProductID"));
+
+            if (reader.HasRows)
+            {
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                viewcartlist.DataSource = dt;
+                viewcartlist.DataBind();
+                decimal totalAmount = dt.AsEnumerable().Sum(row => Convert.ToDecimal(row["Price"]) * row.Field<int>("Quantity"));
+                lbltotal.Text = totalAmount.ToString();
+                Session["orderamount"] = string.Format("{0}", totalAmount);
 
 
-                                        <svg fill="#bbb" class="w-[18px] h-[18px] absolute right-4" viewBox="0 0 64 64">
-                                            <path
-                                                d="m52.148 42.678-6.479-4.527a5 5 0 0 0-6.963 1.238l-1.504 2.156c-2.52-1.69-5.333-4.05-8.014-6.732-2.68-2.68-5.04-5.493-6.73-8.013l2.154-1.504a4.96 4.96 0 0 0 2.064-3.225 4.98 4.98 0 0 0-.826-3.739l-4.525-6.478C20.378 10.5 18.85 9.69 17.24 9.69a4.69 4.69 0 0 0-1.628.291 8.97 8.97 0 0 0-1.685.828l-.895.63a6.782 6.782 0 0 0-.63.563c-1.092 1.09-1.866 2.472-2.303 4.104-1.865 6.99 2.754 17.561 11.495 26.301 7.34 7.34 16.157 11.9 23.011 11.9 1.175 0 2.281-.136 3.29-.406 1.633-.436 3.014-1.21 4.105-2.302.199-.199.388-.407.591-.67l.63-.899a9.007 9.007 0 0 0 .798-1.64c.763-2.06-.007-4.41-1.871-5.713z"
-                                                data-original="#000000">
-                                            </path>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-6">
-                                <h3 class="text-lg font-bold text-[#333] mb-6">Shipping Address</h3>
-                                <div class="grid sm:grid-cols-2 gap-6">
-                                    <asp:TextBox ID="txtaddress" runat="server" CssClass="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" placeholder="B-101, Abc Resi. near XYZ Heights"></asp:TextBox>
-                                    <asp:TextBox ID="txtCity" runat="server" CssClass="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" placeholder="City"></asp:TextBox>
-                                    <asp:TextBox ID="txtState" runat="server" CssClass="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" placeholder="State"></asp:TextBox>
-                                    <asp:TextBox ID="txtZipCode" runat="server" CssClass="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" placeholder="Zip Code"></asp:TextBox>
-                                </div>
+            }
+            else
+            {
+                // If cart is empty, show message or handle accordingly
+                ScriptManager.RegisterStartupScript(this, GetType(), "showToastdanget", "showToastdanget('Empty Cart !!!');", true);
+                /*lbltotal.Visible = false; // Hide total amount label
+                viewcartlist.Visible = false; // Hide repeater*/
 
+            }
+            con.Close();
+        }
 
-                                <div class="mt-6">
-                                    <h3 class="text-lg font-bold text-[#333] mb-6">Payment Method</h3>
-                                    <div class="flex items-center gap-6">
-                                        <asp:RadioButton ID="rdbCOD" runat="server" GroupName="payment" Checked="true" CssClass="rounded-full bg-white   text-green-400 " />COD
-       
-                                   
+        public void deleteProductfromCart(int prdid)
+        {
+            int uid = (int)Session["uid"];
 
-                                        <asp:RadioButton ID="rdbonline" runat="server" GroupName="payment" CssClass=" rounded-full bg-white   text-green-400  " />Online
-   
-                                   
-                                    </div>
-                                </div>
+            //Delete the product from the cart
+            con.Open();
+            string deleteProduct = "DELETE FROM tblCartProduct WHERE Custid = @uid AND pid = @prdid";
+            SqlCommand cmdDelete = new SqlCommand(deleteProduct, con);
+            cmdDelete.Parameters.AddWithValue("@uid", uid);
+            cmdDelete.Parameters.AddWithValue("@prdid", prdid);
+            int rowsDeleted = cmdDelete.ExecuteNonQuery();
+            if (rowsDeleted <= 0)
+            {
+                // alert user if the product was not deleted from the cart
+                Response.Write("<script>alert('Error deleting product from cart');</script>");
+            }
+        }
 
+        // Modify the method to fetch product IDs dynamically based on the user's cart items
+        protected List<int> GetProductIds(int userId)
+        {
+            List<int> productIds = new List<int>();
 
+            try
+            {
+                con.Open();
 
+                SqlCommand cmd = new SqlCommand("SELECT PD.id AS ProductID FROM tblCartProduct CP JOIN tblProductDetail PD ON CP.pid = PD.id WHERE CP.Custid = @uid", con);
+                cmd.Parameters.AddWithValue("@uid", userId);
 
-                                <div class="flex gap-6 max-sm:flex-col mt-10">
-                                    <%--<asp:Button ID="btn_cancel_order" runat="server" Text="Cancel"
-                                        CssClass="rounded-md px-6 py-3 w-full text-sm text-black font-semibold bg-white-700 hover:bg-red-400 border-2"
-                                        OnClick="Cancel_order" />--%>
+                SqlDataReader reader = cmd.ExecuteReader();
 
+                while (reader.Read())
+                {
+                    int productId = reader.GetInt32(reader.GetOrdinal("ProductID"));
+                    productIds.Add(productId);
+                }
 
-
-                                    <asp:Button ID="btn_confirm_order" runat="server" Text="Confirm Order"
-                                        CssClass="rounded-md px-6 py-3 w-full text-sm text-black font-semibold bg-white-700 hover:bg-green-400 hover:text-white border-2"
-                                        OnClick="Confirm_order" />
-
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-        <script>
-            function OpenPaymentWindow(key, amountInSubunits, currency, name, descritpion, imageLogo, orderId, profileName, profileEmail, profileMobile, notes) {
-                notes = $.parseJSON(notes);
-                var options = {
-                    "key": key, // Enter the Key ID generated from the Dashboard
-                    "amount": amountInSubunits, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-                    "currency": currency,
-                    "name": name,
-                    "description": descritpion,
-                    "image": imageLogo,
-                    "order_id": orderId, //This is a sample Order ID. Pass the id obtained in the response of Step 1
-                    "handler": function (response) {
-                        window.location.href = "Success_Order.aspx?orderId=" + response.razorpay_order_id + "&paymentId=" + response.razorpay_payment_id;
-                        //alert(response.razorpay_payment_id);
-                        //alert(response.razorpay_order_id);
-                        //alert(response.razorpay_signature)
-                    },
-                    "prefill": {
-                        "name": profileName,
-                        "email": profileEmail,
-                        "contact": profileMobile
-                    },
-                    "notes": notes,
-                    "theme": {
-                        "color": "#CD853F"
-                    }
-                };
-                var rzp1 = new Razorpay(options);
-                rzp1.open();
-                rzp1.on('payment.failed', function (response) {
-                    console.log(response.error);
-                    alert("Oops, something went wrong and payment failed. Please try again later", response, "    ", error);
-                });
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+                Console.WriteLine("Error fetching product IDs: " + ex.Message);
             }
 
-        </script>
+            return productIds;
+        }
 
-    </form>
+        protected async void Confirm_order(object sender, EventArgs e)
+        {
 
-</asp:Content>
+            Random random = new Random();
+            int oid = random.Next(1, 999999); // Generate a random Order id
+
+            Session["oid"] = oid;
+
+            string pay_type = "";
+            int uid = (int)Session["uid"]; // Assuming the user ID is always "1"
+
+            if (rdbCOD.Checked)
+            {
+
+                int grandtotal;
+                if (int.TryParse(lbltotal.Text, out grandtotal))
+                {
+                    pay_type = "COD";
+
+                    string fname = txtfname.Text;
+                    string lname = txtlname.Text;
+                    string email = txtemail.Text;
+                    string phone = txtcono.Text;
+                    string address = txtaddress.Text;
+                    string city = txtCity.Text;
+                    int totalamt = Convert.ToInt32(lbltotal.Text);
+                    string state = txtState.Text;
+                    string pincode = txtZipCode.Text;
+                    string finaladdress = address + " " + city + " " + state + " " + pincode;
+                    string orderdate = DateTime.Now.ToString("yyyy-MM-dd");
+
+                    try
+                    {
+                        List<int> productIds = GetProductIds(uid);
+
+                        using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString))
+                        {
+                            con.Open();
+                            string insertOrderQuery = "INSERT INTO tblOrder (Orderid, CustId, OrderDate, DeliveryAddress, Total, DeliveryStatus, PaymentType, PaymentStatus) " +
+                            "VALUES (@oid, @uid, @orderdate, @address, @total, 'Pending', @pay_type, 0)";
+                            SqlCommand cmd = new SqlCommand(insertOrderQuery, con);
+                            cmd.Parameters.AddWithValue("@oid", oid);
+                            cmd.Parameters.AddWithValue("@uid", uid);
+                            cmd.Parameters.AddWithValue("@orderdate", orderdate);
+                            cmd.Parameters.AddWithValue("@address", finaladdress);
+                            cmd.Parameters.AddWithValue("@total", totalamt);
+                            cmd.Parameters.AddWithValue("@pay_type", pay_type);
+                            int i = cmd.ExecuteNonQuery();
+
+                            if (i > 0)
+                            {
+                                foreach (int productId in productIds)
+                                {
+                                    int qty = GetProductQuantity(uid, productId);
+
+                                    string insertProductDetails = "INSERT INTO tblOrderProduct (Orderid, Pid, Quantity, cid, sid) " +
+                                                                   "SELECT @OrderId, cp.Pid, cp.Quantity, pd.cid, pd.sid " +
+                                                                   "FROM tblCartProduct cp " +
+                                                                   "INNER JOIN tblProductDetail pd ON cp.Pid = pd.id " +
+                                                                   "WHERE cp.CustId = @uid AND cp.Pid = @prdid";
+                                    SqlCommand cmd1 = new SqlCommand(insertProductDetails, con);
+                                    cmd1.Parameters.AddWithValue("@uid", uid);
+                                    cmd1.Parameters.AddWithValue("@OrderId", oid);
+                                    cmd1.Parameters.AddWithValue("@prdid", productId);
+                                    //cmd1.Parameters.AddWithValue("@qty", qty);
+
+                                    int rowsAffected = cmd1.ExecuteNonQuery();
+                                    if (rowsAffected <= 0)
+                                    {
+                                        Response.Write("<script>alert('Error inserting order product details');</script>");
+                                    }
+                                }
+
+                                // All product details inserted successfully
+
+                            }
+                            else
+                            {
+                                Response.Write("<script>alert('Error inserting order');</script>");
+                            }
+
+
+
+                            // Check if order insertion was successful
+                            if (i > 0 && j > 0)
+                            {
+                                String token = await GetAuthTokenAsync();
+
+                                var response = await CreateOrderAsync(token);
+
+
+                                // Order placed successfully
+                                Response.Write("<script>alert('Order has been placed successfully!');</script>");
+                            }
+                            else
+                            {
+                                Response.Write("<script>alert('Error inserting order');</script>");
+                            }
+
+                            emptyInputbox();
+                        }
+                    }
+
+
+
+
+                    catch (Exception ex)
+                    {
+
+                        Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
+                    }
+                }
+                else
+                {
+                    // lbltotal.Text is not a valid integer
+                    Response.Write("<script>alert('Total amount is not a valid number.');</script>");
+                }
+
+            }
+
+            else
+            {
+                pay_type = rdbonline.Text.ToString();
+                string inputAmount = lbltotal.Text.ToString();
+                decimal registrationAmount;
+
+
+                int grandtotal;
+                if (int.TryParse(inputAmount, out grandtotal))
+                {
+                    decimal amt = grandtotal;
+                    string currency = "INR";
+                    string name = "OMSMS";
+                    string description = "Mobile Order";
+                    string imageLogo = "../Res/Images/logo.png";
+
+                    string profileName = txtfname.Text + " " + txtlname.Text;
+                    string profileMobile = txtcono.Text;
+                    string profileEmail = txtemail.Text;
+                    String address = txtaddress.Text;
+                    String city = txtCity.Text;
+                    String state = txtState.Text;
+                    String pincode = txtZipCode.Text;
+                    String finaladdress = address + " " + city + " " + state + " " + pincode;
+
+                    Session["total"] = amt;
+                    Session["pay_type"] = pay_type;
+                    Session["payer_name"] = profileName;
+                    Session["payer_email"] = profileEmail;
+                    Session["payer_phone"] = profileMobile;
+                    Session["payer_address"] = finaladdress;
+
+                    Dictionary<string, string> notes = new Dictionary<string, string>()
+                {
+                    { "note 1", "this is a payment note" }, { "note 2", "here another note, you can add max 15 notes" }
+                };
+
+
+                    string orderId = CreateOrder(amt, currency, notes);
+
+
+                    // create a shipment
+
+
+                    String token = await GetAuthTokenAsync();
+
+                    var response = await CreateOrderAsync(token);
+
+
+                    string jsFunction = "OpenPaymentWindow('" + _key + "', '" + amt + "', '" + currency + "', '" + name + "', '" + description + "', '" + imageLogo + "', '" + orderId + "', '" + profileName + "', '" + profileEmail + "', '" + profileMobile + "', '" + JsonConvert.SerializeObject(notes) + "');";
+                    ClientScript.RegisterStartupScript(this.GetType(), "OpenPaymentWindow", jsFunction, true);
+                }
+                else
+                {
+                    // Handle the case where the user input is not a valid decimal
+                    // For example:
+                    Console.WriteLine("Invalid input. Please enter a valid decimal number.");
+                }
+
+            }
+        }
+
+        static async Task<String> CreateOrderAsync(string token)
+        {
+            using (var client = new HttpClient())
+            {
+                // Construct the order data
+                var orderData = new
+                {
+                    order_id = "224-448",
+                    order_date = "2024-01-24 11:11",
+                    pickup_location = "PRIYANK",
+                    channel_id = "",
+                    comment = "Reseller: M/s Goku",
+                    billing_customer_name = "Naruto",
+                    billing_last_name = "Uzumaki",
+                    billing_address = "House 221B, Leaf Village",
+                    billing_address_2 = "Near Hokage House",
+                    billing_city = "New Delhi",
+                    billing_pincode = "111111",
+                    billing_state = "Delhi",
+                    billing_country = "India",
+                    billing_email = "naruto@uzumaki.com",
+                    billing_phone = "9876543210",
+                    shipping_is_billing = true,
+                    shipping_customer_name = "",
+                    shipping_last_name = "",
+                    shipping_address = "",
+                    shipping_address_2 = "",
+                    shipping_city = "",
+                    shipping_pincode = "",
+                    shipping_country = "",
+                    shipping_state = "",
+                    shipping_email = "",
+                    shipping_phone = "",
+                    order_items = new[]
+                    {
+                new
+                {
+                    name = "Kunai",
+                    sku = "chakra123",
+                    units = 10,
+                    selling_price = "900",
+                    discount = "",
+                    tax = "",
+                    hsn = 441122
+                }
+            },
+                    payment_method = "Prepaid",
+                    shipping_charges = 0,
+                    giftwrap_charges = 0,
+                    transaction_charges = 0,
+                    total_discount = 0,
+                    sub_total = 9000,
+                    length = 10,
+                    breadth = 15,
+                    height = 20,
+                    weight = 2.5
+                };
+
+                string orderDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(orderData);
+
+                // Construct the request
+                var request = new HttpRequestMessage
+                {
+                    RequestUri = new Uri("https://apiv2.shiprocket.in/v1/external/orders/create/adhoc"),
+                    Method = HttpMethod.Post,
+                    Content = new StringContent(orderDataJson, Encoding.UTF8, "application/json")
+                };
+
+                //request.Headers.Add("Authorization", $"Bearer {token}");
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+
+                // Send the request and get the response
+                var response = await client.SendAsync(request);
+                var responseContent = await response.Content.ReadAsStringAsync();
+
+                Console.WriteLine(responseContent);
+
+                // get value from response
+                dynamic responseObject = Newtonsoft.Json.JsonConvert.DeserializeObject(responseContent);
+
+
+                //{
+                //                    "order_id": 536391450,
+                //    "channel_order_id": "224-448",
+                //    "shipment_id": 534496590,
+                //    "status": "CANCELED",
+                //    "status_code": 5,
+                //    "onboarding_completed_now": 0,
+                //    "awb_code": "",
+                //    "courier_company_id": "",
+                //    "courier_name": ""
+                //}
+
+                // Get the shipment ID, order ID, and channel order ID from the response
+                long shipmentId = responseObject.shipment_id;
+                long orderId = responseObject.order_id;
+                string channelOrderId = responseObject.channel_order_id;
+
+                // Return the response content
+                return responseContent;
+            }
+        }
+        static async Task<string> GetAuthTokenAsync()
+        {
+            string email = "21bmiit145@gmail.com";
+            string password = "Priyank@8414";
+
+            using (var client = new HttpClient())
+            {
+                var requestContent = new StringContent(
+                    $"{{\"email\": \"{email}\", \"password\": \"{password}\"}}",
+                    Encoding.UTF8,
+                    "application/json");
+
+                var response = await client.PostAsync("https://apiv2.shiprocket.in/v1/external/auth/login", requestContent);
+                var responseContent = await response.Content.ReadAsStringAsync();
+
+                // Extract token from response
+                dynamic responseObject = Newtonsoft.Json.JsonConvert.DeserializeObject(responseContent);
+                string token = responseObject.token;
+
+                return token;
+            }
+        }
+
+        private async Task<int> PincodeServiceable(string pincode)
+        {
+            HttpClient client = new HttpClient();
+            String ship_token = "d7bf338ca22e659fc4e56d436b13226eacce0190";
+            client.DefaultRequestHeaders.Add("Authorization", "Token " + ship_token);
+
+            // API endpoint URL
+            try
+            {
+                string apiUrl = $"https://staging-express.delhivery.com/c/api/pin-codes/json/?filter_codes={pincode}";
+                HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    // Read response content
+                    string responseBody = await response.Content.ReadAsStringAsync();
+
+                    // Parse JSON response
+                    JObject jsonResponse = JObject.Parse(responseBody);
+
+                    // Check if delivery_codes array is empty
+                    if (jsonResponse["delivery_codes"].HasValues)
+                    {
+                        Console.WriteLine("Pincode is serviceable.");
+
+                        // Pincode is serviceable
+                        return 1;
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("Pincode is not serviceable.");
+                        return 0;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"Failed to check pincode. Status code: {response.StatusCode}");
+                    return 0;
+                }
+
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error fetching pincode details: " + ex.Message);
+            }
+            finally
+            {
+                // Dispose HttpClient
+                client.Dispose();
+            }
+            return 0;
+        }
+
+
+        private int GetProductQuantity(int userId, int productId)
+        {
+            int quantity = 0;
+
+            try
+            {
+                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString))
+                {
+                    con.Open();
+
+                    string selectQuantityQuery = "SELECT Quantity FROM tblCartProduct WHERE CustId = @userId AND pid = @productId";
+                    SqlCommand cmd = new SqlCommand(selectQuantityQuery, con);
+                    cmd.Parameters.AddWithValue("@userId", userId);
+                    cmd.Parameters.AddWithValue("@productId", productId);
+
+                    object result = cmd.ExecuteScalar();
+
+                    if (result != null && result != DBNull.Value)
+                    {
+                        quantity = Convert.ToInt32(result);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+                Console.WriteLine("Error fetching product quantity: " + ex.Message);
+            }
+
+            return quantity;
+        }
+
+        private void emptyInputbox()
+        {
+            txtfname.Text = "";
+            txtlname.Text = "";
+            txtemail.Text = "";
+            txtcono.Text = "";
+            txtaddress.Text = "";
+            txtCity.Text = "";
+            txtState.Text = "";
+            txtZipCode.Text = "";
+        }
+
+
+
+
+
+        private string CreateOrder(decimal amountInSubunits, string currency, Dictionary<string, string> notes)
+        {
+            try
+            {
+                int paymentCapture = 1;
+
+                RazorpayClient client = new RazorpayClient(_key, _secret);
+                Dictionary<string, object> options = new Dictionary<string, object>();
+                options.Add("amount", amountInSubunits);
+                options.Add("currency", currency);
+                options.Add("payment_capture", paymentCapture);
+                options.Add("notes", notes);
+
+                System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+                System.Net.ServicePointManager.Expect100Continue = false;
+
+                Order orderResponse = client.Order.Create(options);
+                var orderId = orderResponse.Attributes["id"].ToString();
+
+
+                return orderId;
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+    }
+
+
+}
+
+
