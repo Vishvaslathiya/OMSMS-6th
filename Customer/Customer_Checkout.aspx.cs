@@ -1,256 +1,307 @@
-        using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+<%@ Page Title="OMSMS | Checkout" Language="C#" Async="true"  MasterPageFile="~/Res/Customer_Navbar.Master" AutoEventWireup="true" CodeBehind="Customer_Checkout.aspx.cs" Inherits="OMSMS6.Customer.Customer_Checkout" %>
 
-namespace OMSMS6.Customer
-{
-    public partial class Customer_Checkout : System.Web.UI.Page
-    {
-
-        SqlConnection con = new SqlConnection("Data Source=Vishvas;Initial Catalog=OMSMS;Integrated Security=True;");
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            LoadCart();
-            /*  bindCityState();*/
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
 
-        }
+    <title>OMSMS</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%-- Tailwind CSS CDN --%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <%-- Daisy UI CDN --%>
+
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet"
+        type="text/css" />
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <%-- Ionicons Links --%>
+
+    <script type="module"
+        src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
 
-        protected void LoadCart()
-        {
-            SqlConnection con = new SqlConnection("Data Source=Vishvas;Initial Catalog=OMSMS;Integrated Security=True;");
+    <%-- Favicon --%>
+    <link rel="icon" href="Images/logo.png" type="image/png">
 
-            con.Open();
-            string uid = "1"; // Assuming the user ID is always "1"
-            SqlCommand cmd = new SqlCommand("SELECT CP.Id, P.Name AS ProductName, P.ImageName, PD.Price, CP.Quantity FROM tblCartProduct CP JOIN tblProduct P ON CP.Pid = P.Id JOIN tblProductDetail PD ON CP.Pid = PD.Pid WHERE CP.Custid = 1", con);
-            SqlDataReader reader = cmd.ExecuteReader();
-            if (reader.HasRows)
-            {
-                DataTable dt = new DataTable();
-                dt.Load(reader);
-                viewcartlist.DataSource = dt;
-                viewcartlist.DataBind();
-                decimal totalAmount = dt.AsEnumerable().Sum(row => Convert.ToDecimal(row["Price"]) * row.Field<int>("Quantity"));
-                lbltotal.Text = string.Format("{0:C}", totalAmount);
-            }
-            else
-            {
-                // If cart is empty, show message or handle accordingly
-                ScriptManager.RegisterStartupScript(this, GetType(), "showToastdanget", "showToastdanget('Empty Cart !!!');", true);
-                /*lbltotal.Visible = false; // Hide total amount label
-                viewcartlist.Visible = false; // Hide repeater*/
+    <%-- CSS files --%>
+    <link rel="stylesheet" href="../Res/CSS/Style.css">
 
-            }
-            con.Close();
-        }
+    <%-- JQuery files --%>
 
-        protected void Cancel_order(object sender, EventArgs e)
-        {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
-            /*  Response.Write("<script>alert('Order has been cancelled!');  </script>");*/
-            Response.Redirect("Default.aspx");
-        }
-        protected void Confirm_order(object sender, EventArgs e)
-        {
-            // Alert the user that the order has been confirmed
-            Response.Write("<script>alert('Order has been confirmed!');</script>");
-            // String address = txt_cust_address.Text;
-        }
-
-      
-
-    }
-}
-using Newtonsoft.Json;
-using Razorpay.Api;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-
-namespace OMSMS6.Customer
-{
-    public partial class Customer_Checkout : System.Web.UI.Page
-    {
-
-        SqlConnection con = new SqlConnection("Data Source=Vishvas;Initial Catalog=OMSMS;Integrated Security=True;");
-        String total;
-        private const string _key = "rzp_test_Qit3KulorLte0H";
-        private const string _secret = "UpV5ntauZ58ccScdVF5XXN4s";
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            //LoadCart();
-            /*  bindCityState();*/
+    <script type="text/javascript">
+        $(document).ready(function () {
 
 
-        }
+            $('#form1').validate({
+                rules: {
+                    ctl00$ContentPlaceHolder1$txtfname: {
+                        required: true
 
+                    },
+                    ctl00$ContentPlaceHolder1$txtlname: {
+                        required: true
 
-        protected void LoadCart()
-        {
-           SqlConnection con = new SqlConnection("Data Source=Vishvas;Initial Catalog=OMSMS;Integrated Security=True;");
+                    },
+                    ctl00$ContentPlaceHolder1$txtemail: {
+                        required: true,
+                        email: true
 
-        //    con.Open();
-        //    string uid = "1"; // Assuming the user ID is always "1"
-        //    SqlCommand cmd = new SqlCommand("SELECT CP.Id, P.Name AS ProductName, P.ImageName, PD.Price, CP.Quantity FROM tblCartProduct CP JOIN tblProduct P ON CP.Pid = P.Id JOIN tblProductDetail PD ON CP.Pid = PD.Pid WHERE CP.Custid = 1", con);
-        //    SqlDataReader reader = cmd.ExecuteReader();
-        //    if (reader.HasRows)
-        //    {
-        //        DataTable dt = new DataTable();
-        //        dt.Load(reader);
-        //        viewcartlist.DataSource = dt;
-        //        viewcartlist.DataBind();
-        //        decimal totalAmount = dt.AsEnumerable().Sum(row => Convert.ToDecimal(row["Price"]) * row.Field<int>("Quantity"));
-        //        lbltotal.Text = string.Format("&#8377;{0}.00", totalAmount);
-        //        Session["orderamount"] = string.Format("{0}", totalAmount);
+                    },
+                    ctl00$ContentPlaceHolder1$txtcontact: {
+                        required: true,
+                        minlength: true
 
+                    },
+                    ctl00$ContentPlaceHolder1$payment: {
+                        required: true
+                    },
+                    ctl00$ContentPlaceHolder1$txtaddress: {
+                        required: true,
+                        minlength: 5
+                    }
+                },
+                messages: {
+                    ctl00$ContentPlaceHolder1$txtfname: {
+                        required: "Please Enter Your First Name"
 
-        //    }
-        //    else
-        //    {
-        //        // If cart is empty, show message or handle accordingly
-        //        ScriptManager.RegisterStartupScript(this, GetType(), "showToastdanget", "showToastdanget('Empty Cart !!!');", true);
-        //        /*lbltotal.Visible = false; // Hide total amount label
-        //        viewcartlist.Visible = false; // Hide repeater*/
+                    },
+                    ctl00$ContentPlaceHolder1$txtlname: {
+                        required: "Please Enter Your Last Name"
 
-        //    }
-        //    con.Close();
-        //}
+                    },
+                    ctl00$ContentPlaceHolder1$txtemail: {
+                        required: "Please Enter Your Email",
+                        email: "Please enter a valid email address"
+                    },
+                    ctl00$ContentPlaceHolder1$txtcontact: {
+                        required: "Please Enter Your Contact Number",
+                        minlength: "Your Contact must be 10 Digits "
 
-        protected void Cancel_order(object sender, EventArgs e)
-        {
-
-            /*  Response.Write("<script>alert('Order has been cancelled!');  </script>");*/
-            Response.Redirect("Default.aspx");
-        }
-        protected void Confirm_order(object sender, EventArgs e)
-        {
-            string pay_type = "";
-
-            String uid = "1"; // Assuming the user ID is always "1"
-            /*          String u_id = Session["u_id"].ToString();*/
-
-            if (rdbCOD.Checked)
-            {
-                string inputAmount = (String)Session["orderamount"];
-                decimal registrationAmount;
-                pay_type = "COD";
-                if (Decimal.TryParse(inputAmount, out registrationAmount))
-                {
-                    Random random = new Random();
-                    int oid = random.Next(00001, 999999);
-                    String fname = txtfname.Text;
-                    String lname = txtlname.Text;
-                    String email = txtemail.Text;
-                    String phone = txtcono.Text;
-                    String address = txtaddress.Text;
-                    String city = txtCity.Text;
-                    String state = txtState.Text;
-                    String pincode = txtZipCode.Text;
-                    String finaladdress = address + " " + city + " " + state + " " + pincode;
-                    String orderdate = DateTime.Now.ToString("yyyy-MM-dd");
-
-                    Session["oid"] = oid;
-                    Session["total"] = lbltotal.Text;
-                    Session["pay_type"] = pay_type;
-                    Session["payer_name"] = fname + " " + lname;
-                    Session["payer_email"] = email;
-                    Session["payer_phone"] = phone;
-
-                    Response.Redirect("Success_Order.aspx");
+                    },
+                    ctl00$ContentPlaceHolder1$payment: "Please select a Payment Method",
+                    ctl00$ContentPlaceHolder1$txtaddress: {
+                        required: "Please Provide a Delivery Address",
+                        minlength: "Your Address Should be Full Details!!"
+                    }
                 }
-                else
-                {
-                    Console.WriteLine("Invalid input. Please enter a valid decimal number.");
-                }
-            }
-            else
-            {
-                pay_type = rdbonline.Text.ToString();
-                string inputAmount = (String)Session["orderamount"];
-                decimal registrationAmount;
+            });
+        });
+    </script>
+
+</asp:Content>
+
+<%@ Import Namespace="System.Data" %>
+<%@ Import Namespace="System.Web.UI.WebControls" %>
+<%@ Import Namespace="System.Linq" %>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <form runat="server">
+        <section>
+            <div class="font-[sans-serif] bg-gray-50 h-full">
+                <div class="grid lg:grid-cols-2 xl:grid-cols-3 gap-4 h-full">
 
 
-                if (Decimal.TryParse(inputAmount, out registrationAmount))
-                {
-                    decimal amt = registrationAmount;
-                    string currency = "INR";
-                    string name = "OMSMS";
-                    string description = "Mobile Order";
-                    string imageLogo = "../Res/Images/logo.png";
+                    <div class="container mx-auto">
+                        <div class="bg-gray-700 lg:h-screen lg:sticky lg:top-0">
+                            <div class="relative h-full">
+                                <div class="p-8 lg:overflow-auto lg:h-[calc(100vh-60px)]">
+                                    <h2 class="text-2xl font-bold text-white">Order Summary</h2>
+                                    <div class="space-y-6 mt-10">
+                                        <asp:Repeater ID="viewcartlist" runat="server">
+                                            <ItemTemplate>
+                                                <div class="grid sm:grid-cols-2 items-start gap-6">
+                                                    <div class="px-4 py-6 shrink-0 bg-gray-50 rounded-md">
+                                                        <img src='<%# "../Res/Images/" + Eval("ImageName") %>' class="w-full object-contain" />
+                                                        
+                                                    </div>
+                                                    <div>
+                                                        <h3 class="text-base text-white"><%# Eval("ProductName") %></h3>
+                                                        <ul class="text-xs text-white space-y-3 mt-4">
+                                                            <li class="flex flex-wrap gap-4">Size <span class="ml-auto">37</span></li>
+                                                            <li class="flex flex-wrap gap-4">Quantity <span class="ml-auto"><%# Eval("Quantity") %></span></li>
+                                                            <li class="flex flex-wrap gap-4">Total Price <span class="ml-auto"><%# Convert.ToDouble(Eval("Price")) * Convert.ToInt32(Eval("Quantity")) %>.00</span></li>
+                                                            <li class="flex flex-wrap gap-4">Product ID <span id="lblpid12" class="ml-auto"><%# Eval("ProductID").ToString()  %></span> </li> 
+                                                            <%-- Display Product id for each product --%>
+                                                            <asp:Label runat='server' ID="lblpid" Text='<%# Eval("ProductID").ToString()  %>' Visible="true" ></asp:Label>
+                                                            <label class="ml-auto text-2xl text-white" Visible="true" ID="lblpid1" Text='<%# Eval("ProductID").ToString()  %>' ></label>
+                                                        </ul>
+                                                        <%--<label class="ml-auto" runat="server" Visible="true" ID="lblpid" Text="<%# Eval("ProductID").ToString()  %>" ></label>--%>
+                                                    </div>
+                                                </div>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </div>
+                                </div>
+                                <div class="absolute left-0 bottom-0 bg-gray-700 w-full p-4">
+                                    <h4 class="flex flex-wrap gap-4 text-base text-white">Total
+                                        <span class="ml-auto">
+                                        <!-- icon for Rupee sign -->
+                                        <span> <i class="fas fa-rupee-sign"></i></span>
+                                        <asp:Label runat="server" ID="lbltotal" /><span class =" text-base text-white">.00</span> </span>
 
-                    string profileName = txtfname.Text + " " + txtlname.Text;
-                    string profileMobile = txtcono.Text;
-                    string profileEmail = txtemail.Text;
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                    Session["total"] = total;
-                    Session["pay_type"] = pay_type;
-                    Session["payer_name"] = profileName;
-                    Session["payer_email"] = profileEmail;
-                    Session["payer_phone"] = profileMobile;
-                    Session["payer_address"] = txtaddress.Text;
 
-                    Dictionary<string, string> notes = new Dictionary<string, string>()
-                {
-                    { "note 1", "this is a payment note" }, { "note 2", "here another note, you can add max 15 notes" }
+
+                    <div class="xl:col-span-2 h-max rounded-md p-8 sticky top-0">
+                        <h2 class="text-2xl font-bold text-[#333]">Complete your order</h2>
+                        <div class="mt-10">
+                            <div>
+                                <h3 class="text-lg font-bold text-[#333] mb-6">Personal Details</h3>
+                                <div class="grid sm:grid-cols-2 gap-6">
+                                    <div class="relative flex items-center">
+                                        <asp:TextBox placeholder="First Name" ID="txtfname" runat="server" class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none"></asp:TextBox>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-4"
+                                            viewBox="0 0 24 24">
+                                            <circle cx="10" cy="7" r="6" data-original="#000000"></circle>
+                                            <path
+                                                d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
+                                                data-original="#000000">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <div class="relative flex items-center">
+                                        <asp:TextBox placeholder="Last Name" ID="txtlname" runat="server" class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none"></asp:TextBox>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-4"
+                                            viewBox="0 0 24 24">
+                                            <circle cx="10" cy="7" r="6" data-original="#000000"></circle>
+                                            <path
+                                                d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
+                                                data-original="#000000">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <div class="relative flex items-center">
+                                        <asp:TextBox placeholder="Email" ID="txtemail" runat="server" class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none"></asp:TextBox>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-4"
+                                            viewBox="0 0 682.667 682.667">
+                                            <defs>
+                                                <clipPath id="a" clipPathUnits="userSpaceOnUse">
+                                                    <path d="M0 512h512V0H0Z" data-original="#000000"></path>
+                                                </clipPath>
+                                            </defs>
+                                            <g clip-path="url(#a)" transform="matrix(1.33 0 0 -1.33 0 682.667)">
+                                                <path fill="none" stroke-miterlimit="10" stroke-width="40"
+                                                    d="M452 444H60c-22.091 0-40-17.909-40-40v-39.446l212.127-157.782c14.17-10.54 33.576-10.54 47.746 0L492 364.554V404c0 22.091-17.909 40-40 40Z"
+                                                    data-original="#000000">
+                                                </path>
+                                                <path
+                                                    d="M472 274.9V107.999c0-11.027-8.972-20-20-20H60c-11.028 0-20 8.973-20 20V274.9L0 304.652V107.999c0-33.084 26.916-60 60-60h392c33.084 0 60 26.916 60 60v196.653Z"
+                                                    data-original="#000000">
+                                                </path>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    <div class="relative flex items-center">
+                                        <asp:TextBox placeholder="Contact Number" ID="txtcono" runat="server" class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none"></asp:TextBox>
+
+
+                                        <svg fill="#bbb" class="w-[18px] h-[18px] absolute right-4" viewBox="0 0 64 64">
+                                            <path
+                                                d="m52.148 42.678-6.479-4.527a5 5 0 0 0-6.963 1.238l-1.504 2.156c-2.52-1.69-5.333-4.05-8.014-6.732-2.68-2.68-5.04-5.493-6.73-8.013l2.154-1.504a4.96 4.96 0 0 0 2.064-3.225 4.98 4.98 0 0 0-.826-3.739l-4.525-6.478C20.378 10.5 18.85 9.69 17.24 9.69a4.69 4.69 0 0 0-1.628.291 8.97 8.97 0 0 0-1.685.828l-.895.63a6.782 6.782 0 0 0-.63.563c-1.092 1.09-1.866 2.472-2.303 4.104-1.865 6.99 2.754 17.561 11.495 26.301 7.34 7.34 16.157 11.9 23.011 11.9 1.175 0 2.281-.136 3.29-.406 1.633-.436 3.014-1.21 4.105-2.302.199-.199.388-.407.591-.67l.63-.899a9.007 9.007 0 0 0 .798-1.64c.763-2.06-.007-4.41-1.871-5.713z"
+                                                data-original="#000000">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-6">
+                                <h3 class="text-lg font-bold text-[#333] mb-6">Shipping Address</h3>
+                                <div class="grid sm:grid-cols-2 gap-6">
+                                    <asp:TextBox ID="txtaddress" runat="server" CssClass="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" placeholder="B-101, Abc Resi. near XYZ Heights"></asp:TextBox>
+                                    <asp:TextBox ID="txtCity" runat="server" CssClass="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" placeholder="City"></asp:TextBox>
+                                    <asp:TextBox ID="txtState" runat="server" CssClass="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" placeholder="State"></asp:TextBox>
+                                    <asp:TextBox ID="txtZipCode" runat="server" CssClass="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" placeholder="Zip Code"></asp:TextBox>
+                                </div>
+
+
+                                <div class="mt-6">
+                                    <h3 class="text-lg font-bold text-[#333] mb-6">Payment Method</h3>
+                                    <div class="flex items-center gap-6">
+                                        <asp:RadioButton ID="rdbCOD" runat="server" GroupName="payment" Checked="true" CssClass="rounded-full bg-white   text-green-400 " />COD
+       
+                                   
+
+                                        <asp:RadioButton ID="rdbonline" runat="server" GroupName="payment" CssClass=" rounded-full bg-white   text-green-400  " />Online
+   
+                                   
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="flex gap-6 max-sm:flex-col mt-10">
+                                    <%--<asp:Button ID="btn_cancel_order" runat="server" Text="Cancel"
+                                        CssClass="rounded-md px-6 py-3 w-full text-sm text-black font-semibold bg-white-700 hover:bg-red-400 border-2"
+                                        OnClick="Cancel_order" />--%>
+
+
+
+                                    <asp:Button ID="btn_confirm_order" runat="server" Text="Confirm Order"
+                                        CssClass="rounded-md px-6 py-3 w-full text-sm text-black font-semibold bg-white-700 hover:bg-green-400 hover:text-white border-2"
+                                        OnClick="Confirm_order" />
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+        <script>
+            function OpenPaymentWindow(key, amountInSubunits, currency, name, descritpion, imageLogo, orderId, profileName, profileEmail, profileMobile, notes) {
+                notes = $.parseJSON(notes);
+                var options = {
+                    "key": key, // Enter the Key ID generated from the Dashboard
+                    "amount": amountInSubunits, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                    "currency": currency,
+                    "name": name,
+                    "description": descritpion,
+                    "image": imageLogo,
+                    "order_id": orderId, //This is a sample Order ID. Pass the id obtained in the response of Step 1
+                    "handler": function (response) {
+                        window.location.href = "Success_Order.aspx?orderId=" + response.razorpay_order_id + "&paymentId=" + response.razorpay_payment_id;
+                        //alert(response.razorpay_payment_id);
+                        //alert(response.razorpay_order_id);
+                        //alert(response.razorpay_signature)
+                    },
+                    "prefill": {
+                        "name": profileName,
+                        "email": profileEmail,
+                        "contact": profileMobile
+                    },
+                    "notes": notes,
+                    "theme": {
+                        "color": "#CD853F"
+                    }
                 };
-
-                    // alert the total
-                    Response.Write("<script>alert('Total Amount: " + total + "');</script>");
-
-
-                    string orderId = CreateOrder(amt, currency, notes);
-                    string jsFunction = "OpenPaymentWindow('" + _key + "', '" + amt + "', '" + currency + "', '" + name + "', '" + description + "', '" + imageLogo + "', '" + orderId + "', '" + profileName + "', '" + profileEmail + "', '" + profileMobile + "', '" + JsonConvert.SerializeObject(notes) + "');";
-                    ClientScript.RegisterStartupScript(this.GetType(), "OpenPaymentWindow", jsFunction, true);
-                }
-                else
-                {
-                    // Handle the case where the user input is not a valid decimal
-                    // For example:
-                    Console.WriteLine("Invalid input. Please enter a valid decimal number.");
-                }
-
+                var rzp1 = new Razorpay(options);
+                rzp1.open();
+                rzp1.on('payment.failed', function (response) {
+                    console.log(response.error);
+                    alert("Oops, something went wrong and payment failed. Please try again later", response, "    ", error);
+                });
             }
-        }
 
-        private string CreateOrder(decimal amountInSubunits, string currency, Dictionary<string, string> notes)
-        {
-            try
-            {
-                int paymentCapture = 1;
+        </script>
 
-                RazorpayClient client = new RazorpayClient(_key, _secret);
-                Dictionary<string, object> options = new Dictionary<string, object>();
-                options.Add("amount", amountInSubunits);
-                options.Add("currency", currency);
-                options.Add("payment_capture", paymentCapture);
-                options.Add("notes", notes);
+    </form>
 
-                System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
-                System.Net.ServicePointManager.Expect100Continue = false;
-
-                Order orderResponse = client.Order.Create(options);
-                var orderId = orderResponse.Attributes["id"].ToString();
-                return orderId;
-            }
-            catch (Exception e)
-            {
-                return e.Message;
-            }
-        }
-
-
-    }
-}
+</asp:Content>
