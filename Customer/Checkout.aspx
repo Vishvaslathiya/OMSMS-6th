@@ -8,6 +8,7 @@
     <!-- component -->
     <div class="flex flex-col md:flex-row bg-gray-100 w-screen h-full px-14 py-7">
 
+
         <!-- My Cart -->
         <div class="w-full flex flex-col h-fit gap-4 p-4 ">
             <p class="text-blue-900 text-xl font-extrabold">My cart</p>
