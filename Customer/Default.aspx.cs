@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace OMSMS6.Customer
+
 {
     public partial class Default : System.Web.UI.Page
     {
