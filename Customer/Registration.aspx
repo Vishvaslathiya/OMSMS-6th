@@ -1,4 +1,4 @@
-<%@ Page Title="OMSMS | Registration" Language="C#" MasterPageFile="~/Res/Customer_Navbar.Master" AutoEventWireup="true" CodeBehind="Registration.aspx.cs" Inherits="OMSMS6.Customer.Registration" %>
+﻿<%@ Page Title="OMSMS | Registration" Language="C#" MasterPageFile="~/Res/Customer_Navbar.Master" AutoEventWireup="true" CodeBehind="Registration.aspx.cs" Inherits="OMSMS6.Customer.Registration" %>
 
 <%@ Register Src="~/Links.ascx" TagName="Links" TagPrefix="omsms" %>
 
@@ -48,13 +48,13 @@
                     },
                     ctl00$ContentPlaceHolder1$txtEmail: {
                         required: true,
-                        email: true,
+                        //email: true,
                     },
                     ctl00$ContentPlaceHolder1$txtContact: {
                         required: true,
-                        number: true,
-                        minlength: 10,
-                        maxlength: 10,
+                        //number: true,
+                        //minlength: 10,
+                        //maxlength: 10,
                     },
                     ctl00$ContentPlaceHolder1$txtPassword: {
                         required: true,
@@ -85,13 +85,13 @@
                     },
                     ctl00$ContentPlaceHolder1$txtEmail: {
                         required: "Please Enter Your Email!",
-                        email: "Please Enter Valid Email!",
+                        //email: "Please Enter Valid Email!",
                     },
                     ctl00$ContentPlaceHolder1$txtContact: {
                         required: "Please Enter Contact Number!",
-                        number: "Please Enter Valid Contact Number!",
-                        minlength: "Please Enter 10 Digit Contact Number!",
-                        maxlength: "Please Enter 10 Digit Contact Number!",
+                        //number: "Please Enter Valid Contact Number!",
+                        //minlength: "Please Enter 10 Digit Contact Number!",
+                        //maxlength: "Please Enter 10 Digit Contact Number!",
                     },
                     ctl00$ContentPlaceHolder1$txtPassword: {
                         required: "Please Enter Password!",
@@ -137,18 +137,21 @@
                     <div class="mt-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Full Name</label>
                         <asp:TextBox runat="server" ID="txtName" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" />
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtName" ErrorMessage="Name should contain Character Only!" ForeColor="Red" ValidationExpression="^[a-zA-Z\s]*$" Display="Dynamic"></asp:RegularExpressionValidator>
                     </div>
 
                     <%-- Email --%>
                     <div class="mt-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
                         <asp:TextBox runat="server" ID="txtEmail" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" TextMode="Email" />
+                        <%--<asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="txtEmail" ErrorMessage="Please Enter Valid Email!" ForeColor="Red" ValidationExpression="\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b" Display="Dynamic"></asp:RegularExpressionValidator>--%>
                     </div>
 
                     <%-- Contact Number --%>
                     <div class="mt-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Contact Number</label>
                         <asp:TextBox runat="server" ID="txtContact" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" TextMode="Phone" />
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="txtContact" ForeColor="Red" ErrorMessage="Please Enter Valid Contact Number!" ValidationExpression="^[6-9]\d{9}$" Display="Dynamic"></asp:RegularExpressionValidator>
                     </div>
 
                     <%-- Password --%>
@@ -240,6 +243,7 @@
         </div>
     </div>
     <script>
+        // Close
         function onClickClose() {
             window.location.href = "Default.aspx";
         }
