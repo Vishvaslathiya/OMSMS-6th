@@ -16,6 +16,7 @@ namespace OMSMS6.Admin
                 Response.Redirect("../Customer/Default.aspx");
             }
         }
+
         //protected void btnSignout_Click(object sender, EventArgs e)
         //{
         //    Session.RemoveAll();
