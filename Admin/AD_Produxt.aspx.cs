@@ -12,6 +12,7 @@ namespace OMSMS6.Admin
     public partial class AD_Product : System.Web.UI.Page
     {
         //SqlConnection conn = new SqlConnection("Data Source=LAPTOP-SHON9L4N\\SQLEXPRESS;Initial Catalog=omsms;Integrated Security=True;");
+
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString);
 
         int aid, daid;
@@ -40,6 +41,7 @@ namespace OMSMS6.Admin
         {
             conn.Close();
             conn.Open();
+
             SqlCommand activateProduct = new SqlCommand("UPDATE tblProduct SET status = 1 WHERE id = @id", conn);
             activateProduct.Parameters.AddWithValue("@id", aid);
             int isActivated = activateProduct.ExecuteNonQuery();
